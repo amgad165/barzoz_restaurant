@@ -1,0 +1,352 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/img/ico/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'assets/img/ico/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
+
+    <title>BARZOZ</title>
+
+{% include "includes/links.html" %}
+
+   
+    <style>
+
+
+    </style>
+
+
+<style>
+@media (min-width: 768px){
+.navbar-default {
+    padding: unset !important;
+    border: 0;
+}
+
+.navbar-default a{
+    margin-left: 10px;
+    margin-top: 20px;
+   
+}
+
+.navbar-default{
+    padding: unset !important;
+}
+.navbar-brand{
+
+    line-height: normal !important;
+    margin-top: 20px !important;
+    margin-left: 5px !important;
+    
+}
+.logo img{
+    margin-left: -10px !important;
+}
+#cart{
+    font-size: 26px;
+}
+
+}
+body{
+    background-color: #143125 !important;
+}
+.menu-image{
+width: 100%;
+max-height: 150px;
+}
+.menu-title , .menu-description{
+    color: #c6a880 !important;
+    font-family: futuremedium;
+    letter-spacing: 4px;
+
+}
+.menu-description{
+    line-height: 20px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+.menu-title{
+    font-size: 19px;
+}
+
+.menu-cart{
+margin-left: 30px;
+font-size: 30px !important;
+margin-top: -10px;
+background-color: transparent;
+border-color: #c6a880 !important;
+border-radius: 0;
+font-weight: 700;
+color: #c6a880;
+background-color: transparent;
+padding: 0px 10px 0px 10px !important;
+
+}
+.menu-cart i {
+    color: #c6a880;
+}
+
+.menu-cart:hover i{
+color: whitesmoke !important;
+}
+
+@media (min-width: 1200px){
+.container {
+    width: 950px;
+}
+}
+@media (min-width: 1400px) and (max-width: 1600px){
+.container {
+    width: 1150px;
+}
+}
+@media (min-width: 1600px) {
+.container {
+    width: 1370px;
+}
+}
+
+
+</style>
+
+</head>
+
+<body id="page-top" class="regular-navigation covered-section">
+
+
+
+    <div class="master-wrapper">
+        
+        <div class="preloader">
+            <div class="preloader-img">
+            	<span class="loading-animation animate-flicker"><img src="{% static 'assets/img/loading.GIF' %}" alt="loading" /></span>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default " data-wow-delay="0.2s">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
+                    
+                   <a class="navbar-brand smoothie" href="{% url 'home' %}">BAZROZ</span></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="main-navigation">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span id="cart-badge">{{ total_quantity }}</span></a></li>      
+
+
+
+                    </ul>
+
+                </div>
+
+                
+                <!-- /.navbar-collapse -->         
+
+            </div>
+            <div class="horizontal-line"></div>
+            <!-- /.container-fluid -->
+        </nav>
+
+
+
+        <section id="main-menu" class="green-back ">
+
+            <div class="vertical-line1 visible-xl visible-lg"></div>
+            <div class="vertical-line2 visible-xl visible-lg"></div>
+            <div class="section-inner">
+
+
+{% for category, menu_items in menu_items_by_category.items %}
+
+                 <div class="container wow fadeIn">
+                    <div class="row">
+                        <div class="col-lg-12 text-center mb50">
+                            <h2 class="section-heading"><img src="{% static 'assets/img/bg/title_icon.png' %}" alt="">&nbsp;&nbsp; {{ category }} &nbsp;&nbsp;<img src="{% static 'assets/img/bg/title_icon.png' %}" alt=""></h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container">
+
+                    <div class="row wow fadeIn">
+                        <div class="col-md-12 ">
+                        
+                              {% for item in menu_items %}
+                            
+                            
+                            <div class="food-menu-item">
+                                <div class="row">
+                                    <div class="col-xs-3 col-md-2">
+                                        <img class="menu-image" src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
+                                    </div>
+                                    <div class="col-xs-9 col-md-10">
+                                        
+                                        <div class="menu-item-info">
+                                            <div class="col-2">
+                                            <h3 class="menu-title">{{ item.name }}</h3>
+                                        </div>
+
+                                        
+                                            <div class="vertical-lines col-2">
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                            </div>
+                                            <div class="col-2">
+                                            <h3>€{{ item.price }}</h3>
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <button  data-item-id="{{ item.id }}"  class="menu-cart btn btn-primary add-to-cart-button"><i  class="fa fa-shopping-cart "></i></button>
+                                            
+                                        </div>
+                                        </div>
+                                    </div>
+                                        <div class="row">
+                                        <div class="col-xs-8">
+                                        <p class="menu-description">{{ item.description }}</p>
+                                    </div>
+                                </div>
+                                    
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+
+
+                        </div>
+
+        
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </section>
+
+
+
+
+{% include 'includes/footer.html' %}
+
+  
+
+
+        <div id="bottom-frame"></div>
+
+        <a href="#" id="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
+
+    </div>
+
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/init.js' %}"></script>
+
+
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+       'use strict';
+        jQuery('#headerwrap').backstretch([
+          "{% static 'assets/img/bg/16342.jpg' %}",
+          "{% static 'assets/img/bg/bg-main.jpg' %}",
+        //   "assets/img/bg/bg3.jpg",
+        ], {duration: 8000, fade: 500});
+    });
+    </script>
+
+
+
+<script>
+    $(document).ready(function() {
+        // Calculate the total height of the covered sections
+        var totalHeight = 0;
+        $(".covered-section").each(function() {
+            console.log(totalHeight)
+            totalHeight += $(this).height();
+
+});
+
+        // Set the height of the vertical line
+        $(".vertical-line1").height(totalHeight);
+        $(".vertical-line2").height(totalHeight);
+
+    });
+</script>
+
+
+
+
+
+<script>
+    $(document).ready(function() {
+        
+        $('.add-to-cart-button').click(function() {
+
+
+            var itemId = $(this).data('item-id');
+            // var quantity = parseInt($('#quantity').val());
+            var data = {
+                id: itemId,
+                // qty: quantity,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            };
+            
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'add_to_cart' %}',
+                data: data,
+                success: function(response) {
+
+                    // Update the total quantity in the cart display
+                    var totalQuantity = response.cart_items_count
+
+                    // $('#total-quantity').text(totalQuantity);
+					// Display the badge and animate it
+					$('#cart-badge').text(totalQuantity).show().animate({
+							fontSize: '16px',
+						}, 200).animate({
+							fontSize: '12px',
+						}, 200);
+
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+
+</html>

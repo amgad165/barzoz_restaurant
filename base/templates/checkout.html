@@ -1,0 +1,397 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/img/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/img/ico/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'assets/img/ico/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
+
+    <title>BARZOZ</title>
+
+{% include "includes/links.html" %}
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+
+
+@media (min-width: 768px){
+.navbar-default {
+    padding: unset !important;
+    border: 0;
+}
+
+.navbar-default a{
+    margin-left: 10px;
+    margin-top: 20px;
+   
+}
+
+.navbar-default{
+    padding: unset !important;
+}
+.navbar-brand{
+
+    line-height: normal !important;
+    margin-top: 20px !important;
+    margin-left: 5px !important;
+    
+}
+.logo img{
+    margin-left: -10px !important;
+}
+#cart{
+    font-size: 26px;
+}
+.line{
+    width: 700px !important;
+}
+}
+body{
+    background-color: #143125 !important;
+}
+.menu-image{
+width: 200px;
+height: 180px;
+}
+.menu-title , .menu-description{
+    color: #c6a880 !important;
+    font-family: futuremedium;
+    letter-spacing: 4px;
+
+}
+
+
+
+.form-group{
+    color: #c6a880;
+}
+.panel{
+    color: #c6a880;
+    font-family: futuremedium;
+    background-color: transparent !important;
+    padding: 50px;
+    padding-top: 20px;  
+}
+
+.line{
+    width: auto !important;
+}
+.order-item-container{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.panel-default {
+    border-color: #c6a880 !important;
+}
+.panel .heading{
+    font-family: futuremedium;
+}
+.order-item-container p{
+    font-size: 18px ;
+    font-family: futuremedium;
+}
+.radio-div{
+    font-size: 18px ;
+    font-family: futuremedium;
+    margin-top: 30px;
+}
+.form-check-input{
+accent-color: #c6a880 !important;
+}
+.form-check-label{
+    font-size: 18px;
+    margin-left: 10px;
+    font-family: futurelight;
+}
+.form-check{
+    margin-top: 10px;
+}
+.details{
+    color: #716262 ;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.coupon-text{
+color: #c6a880 !important;
+font-size: 18px;
+}
+.coupon-text a{
+    color: #c6a880 !important;
+    font-family: futuremedium;
+}
+.card{
+background-color: #0f1d22;
+padding: 30px;
+}
+    </style>
+
+
+
+</head>
+
+<body id="page-top" class="regular-navigation covered-section">
+
+
+
+    <div class="master-wrapper">
+        
+        <div class="preloader">
+            <div class="preloader-img">
+            	<span class="loading-animation animate-flicker"><img src="{% static 'assets/img/loading.GIF' %}" alt="loading" /></span>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default " data-wow-delay="0.2s">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                    <a class="logo smoothie" href="{% url 'home'  %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
+                    
+                   <a class="navbar-brand smoothie" href="{% url 'home'  %}">BAZROZ</span></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="main-navigation">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li><a href="#the-menu" class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i></a></li>      
+
+
+
+                    </ul>
+
+                </div>
+
+                
+                <!-- /.navbar-collapse -->         
+
+            </div>
+            <div class="horizontal-line"></div>
+            <!-- /.container-fluid -->
+        </nav>
+
+
+
+        <section id="main-menu" class="green-back ">
+
+
+            <div class="section-inner">
+
+                
+                <div class="container">
+                <div style="margin-bottom: 20px;" class="row">
+                    <div class="col-md-12">
+                    <p class="coupon-text">
+                        Haben Sie einen Gutschein?
+                        <a  data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          GEBEN SIE IHREN CODE EIN
+                        </a>
+
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body coupon-text ">
+                            <p style="color: #716262; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Wenn Sie einen Gutschein-code haben, wenden Sie sich bitte unten.</p>
+                            <div class="row">
+                                
+                            <form action="{% url 'add_coupon'  %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group col-xs-4" >
+                                
+                                <input name="coupon" style="background-color: #143125 ; font-size: 16px;" type="input" class="form-control" placeholder="Gutschein-code" >
+                            </div>
+                            <div class="form-group col-xs-4" >
+                                <button type="submit" class="custom-button btn btn-primary">GUTSCHEIN EINLOSEN</button>
+                            </div>
+                        </form>
+                        </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+                    <div class="row wow fadeIn">
+                        <form action="{% url 'create-checkout-session' order.id %}" method="POST">
+                            {% csrf_token %}
+                    <div class="col-md-7 ">
+                    <div class="form-group">
+                        <h2>Zahlungsinformationen</h2>
+                    </div>
+                       
+                            <div class="inline-block">
+                                <div class="form-group" style="display: inline-block; width: 49%;">
+                                    <label for="exampleInputEmail1">Vorname *</label>
+                                    <input required name="vorname" type="input" class="form-control" id="exampleInputEmail1" >
+                                </div>
+                            
+                                <div class="form-group" style="display: inline-block; width: 50%;">
+                                    <label for="exampleInputEmail2">Nachname *</label>
+                                    <input required name="nachname" type="input" class="form-control" id="exampleInputEmail2" >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Bezirk *</label>
+                                <input required name="bezirk" type="input" class="form-control" id="exampleInputEmail1" >
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Street address</label>
+                                <input required name="street_address" type="input" class="form-control" id="exampleInputEmail1" placeholder="Adresse">
+                                <input required name="hausnummer" style="margin-top: 5px;" type="input" class="form-control" id="exampleInputEmail1" placeholder="Hausnummer, Stiege, Stock, Tur">
+
+                              </div>
+
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">PLZ / ZIP *</label>
+                                <input required name="plz_zip" type="input" class="form-control" id="exampleInputEmail1" >
+                              </div>
+
+   
+                              <div class="form-group">
+                                <label for="exampleFormControlSelect1">Stadt / City *</label>
+                                <select required name="city" class="form-control" id="exampleFormControlSelect1">
+                                  <option>city 1</option>
+
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Telefon *</label>
+                                <input required name="telefon" type="input" class="form-control" id="exampleInputEmail1" >
+                              </div>
+
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">E-mail-Adresse *</label>
+                                <input required name="email" type="email" class="form-control" id="exampleInputEmail1">
+                              </div>
+                              <div class="form-group">
+                                <h2>Weitere Informationen</h2>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Um Hinweise (optional)</label>
+                                <textarea  class="form-control" name="um_hinweise" id="exampleInputEmail1" cols="30" rows="5" placeholder="Hinweise zu Ihrer Bestellung, wie z.B Besondere Hinweise fur die Lieferung"></textarea>
+                                
+                              </div>
+                     
+                        
+
+                    </div>
+
+                    <div class="col-md-5 ">
+                        <div class="panel panel-default" >
+                            <div class="heading">
+                                <h2>IHRE BESTELLUNG</h2>
+                                </div>
+
+                            <div class="card-body">
+                                <h2>Produkt</h2>
+                                <div class="line"></div>
+      
+                    {% for order_item in order_items %}
+                    <div class="order-item-container">
+                        <p>{{ order_item.menu_item.name }} x {{ order_item.quantity }}</p>
+                        <p>€ {{ order_item.get_total_item_price }}</p>
+                        
+                    </div>
+
+                   
+                    {% endfor %}
+                    <div style="margin-top: 20px;"  class="order-item-container">
+                        <p>Zwischensumme</p>
+                        <p>€ {{subtotal_price}}</p>
+                        
+                    </div>
+                    <div class="line"></div>
+                    {% if discount %}
+                    <div style="margin-top: 20px;" class="order-item-container">
+                        <p>Discount</p>
+                        <p style="font-size: 1.2em;font-weight: bolder;">-% {{discount}}</p>
+                        
+                    </div>
+
+                    {% endif %}
+          
+                        <div style="margin-top: 20px;" class="order-item-container">
+                            <p>Total</p>
+                            <p style="font-size: 1.5em;font-weight: bolder;">€ {{total_price}}</p>
+                            
+                        </div>
+                        
+
+                        <div class="radio-div">
+                            <p style="font-size: 18px; margin-bottom: 20px;">Zahlung Methoden</p>
+
+                            <div  class="form-check">
+                                <input  class="form-check-input custom-control-input" type="radio" value="on_delivery" name="payment_type" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  Cash on delivery
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input  class="form-check-input" type="radio" value="karte" name="payment_type" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                  Karte
+                                </label>
+                              </div>
+                        </div>
+                        <p class="details"> Your personal data will be used to process your order , support your experience throught this website, and for other purposes descrived in our terms</p>
+                            <button type="submit" class="custom-button btn btn-primary">ZAHLEN</button>
+                    </div>
+                          </div>
+                    </div>
+                
+                </form>
+                    </div>
+              
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+  
+
+  {% include 'includes/footer.html' %}
+
+        <div id="bottom-frame"></div>
+
+        <a href="#" id="back-to-top"><i class="fa fa-long-arrow-up"></i></a>
+
+    </div>
+
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/init.js' %}"></script>
+
+
+
+
+</body>
+
+</html>
