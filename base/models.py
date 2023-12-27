@@ -74,7 +74,19 @@ class Order(models.Model):
         return quantity
     
     
-
+class User_details(models.Model):
+    vorname = models.CharField(max_length=255)
+    nachname = models.CharField(max_length=255)
+    bezirk = models.CharField(max_length=255)
+    street_address = models.CharField(max_length=255)
+    hausnummer = models.CharField(max_length=255)
+    plz_zip = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    telefon = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    um_hinweise = models.CharField(max_length=500,null=True, blank= True)
+    def __str__(self):
+        return self.vorname + " " + self.nachname
 
 class Coupon(models.Model):
     code = models.CharField(max_length=15, unique=True)
@@ -113,19 +125,7 @@ class Coupon(models.Model):
 
 
 
-class User_details(models.Model):
-    vorname = models.CharField(max_length=255)
-    nachname = models.CharField(max_length=255)
-    bezirk = models.CharField(max_length=255)
-    street_address = models.CharField(max_length=255)
-    hausnummer = models.CharField(max_length=255)
-    plz_zip = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    telefon = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    um_hinweise = models.CharField(max_length=500,null=True, blank= True)
-    def __str__(self):
-        return self.vorname + " " + self.nachname
+
 
 
 
