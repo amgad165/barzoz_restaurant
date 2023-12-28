@@ -39,6 +39,7 @@ header h2 {
 .data p a {
   color: #4070f4;
   text-decoration: none;
+  white-space: nowrap;
 }
 .data p a:hover {
   text-decoration: underline;

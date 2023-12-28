@@ -21,6 +21,7 @@
 {% include "includes/links.html" %}
 
 </head>
+    
 <div class="wrapper ">
       <header>
         <i class="bx bx-cookie"></i>
@@ -34,13 +35,15 @@
         <button class="button" id="declineBtn">Nur essenzielle Cookies akzeptieren</button>
 
       </div>
-     <div style="margin-top: 10px;" class="row ">
+     <div style="margin-top: 10px;" class="row">
         <div class="col-xs-4"><a href="{% url 'cookies_details' %}  ">Cookie-details</a></div>
-        <div class="col-xs-4"><a href="{% url 'Datenschutzerklarung' %}">Datenschutzerklarung</a></div>
-        <div class="col-xs-4"><a href="{% url 'impressum' %}">Impressum</a></div>
+        <div class="col-xs-5"><a href="{% url 'Datenschutzerklarung' %}">Datenschutzerklarung</a></div>
+        <div class="col-xs-3"><a href="{% url 'impressum' %}">Impressum</a></div>
 
      </div>     
     </div>
+
+
 
 <body id="page-top" class="regular-navigation">
 
