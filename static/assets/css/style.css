@@ -231,9 +231,7 @@ body {
 .thumbnail a>img,
 .carousel-inner>.item>img,
 .carousel-inner>.item>a>img {
-    width: 100%;
-    max-height: 100px;
-    max-width: 120px;
+    width: 100%
 }
 
 .img-thumbnail {
@@ -793,7 +791,7 @@ section, section.white-bg {
 section h2.section-heading, .section-heading {
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 48px;
+    font-size: 42px;
     letter-spacing: 10px;
     font-weight: 700;
 }
@@ -2291,7 +2289,7 @@ width: 67px;
 
 
 
-@media(max-width: 767px) {
+@media(max-width: 821px) {
   .logo img{
     width: 40px;
     height: 47px;
@@ -2316,12 +2314,12 @@ background-color: #c6a880 !important;
 
 
 .in{
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color:rgba(0, 0, 0, 0.9);
 
 }
 
 .section-heading {
-    font-size: 16px !important;
+    font-size: 15px !important;
     letter-spacing: 0px !important;
 }
 .section-subheading{

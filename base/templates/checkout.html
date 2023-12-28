@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
 
-    <title>BAZROZ</title>
+    <title>BARZOZ</title>
 
 {% include "includes/links.html" %}
 
@@ -137,6 +137,18 @@ font-size: 18px;
 background-color: #0f1d22;
 padding: 30px;
 }
+.card-body button{
+    font-family: futuremedium;
+}
+@media(max-width: 767px) {
+.card-body .form-control{
+    height: auto;
+}
+.card-body input ,.card-body button{
+font-size: 10px !important;
+padding: 10px !important;
+}
+}
     </style>
 
 
@@ -160,23 +172,18 @@ padding: 30px;
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+
+                    <a class="navbar-toggle" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
+                    <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
                     
-                    <a class="logo smoothie" href="{% url 'home'  %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
-                    
-                   <a class="navbar-brand smoothie" href="{% url 'home'  %}">BAZROZ</span></a>
+                   <a class="navbar-brand smoothie" href="{% url 'home' %}">BAZROZ</span></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="#the-menu" class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i></a></li>      
+                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
@@ -217,11 +224,11 @@ padding: 30px;
                                 
                             <form action="{% url 'add_coupon'  %}" method="POST">
                             {% csrf_token %}
-                            <div class="form-group col-xs-4" >
+                            <div class="form-group col-xs-5 col-md-4" >
                                 
                                 <input name="coupon" style="background-color: #143125 ; font-size: 16px;" type="input" class="form-control" placeholder="Gutschein-code" >
                             </div>
-                            <div class="form-group col-xs-4" >
+                            <div class="form-group col-xs-7 col-md-4" >
                                 <button type="submit" class="custom-button btn btn-primary">GUTSCHEIN EINLOSEN</button>
                             </div>
                         </form>

@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
 
-    <title>BAZROZ</title>
+    <title>BARZOZ</title>
 
    
 {% include "includes/links.html" %}
@@ -57,6 +57,10 @@
 }
 .line{
     width: 700px !important;
+}
+.removeWrap a.remove{
+    margin-left: 15px;
+    margin-top: 15px;
 }
 }
 body{
@@ -103,6 +107,62 @@ color: whitesmoke !important;
 }
 
 
+.infoWrap .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.custom-col {
+    flex: 1; /* Each column takes equal width */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    padding: 0 10px; /* Optional: Add padding to columns */
+}
+
+.infoWrap h3{
+
+white-space: nowrap;
+    }
+
+@media(max-width: 767px) {
+.center-divs-mobile
+{
+display: flex;
+justify-content: center;    
+
+    }
+
+
+
+.infoWrap h3{
+font-size: 9px ;
+margin-top: 15px;
+white-space: nowrap;
+    }
+.infoWrap p{
+font-size: 7px !important ;
+    }
+.cartSection p{
+font-size: 9px !important ;
+
+}
+.removeWrap a.remove{
+    font-size: 8px ;
+    margin-top: 15px;
+}
+.infoWrap input{
+    width: 40% !important;
+}
+
+.infoWrap img{
+min-width: 40px;
+min-height: 40px;
+}
+
+}
+
+
+
 
     </style>
 
@@ -123,12 +183,8 @@ color: whitesmoke !important;
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+
+                    <a class="navbar-toggle" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
                     <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
                     
                    <a class="navbar-brand smoothie" href="{% url 'home' %}">BAZROZ</span></a>
@@ -138,7 +194,7 @@ color: whitesmoke !important;
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="#the-menu" class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span id="cart-badge">{{ total_quantity }}</span></a></li>      
+                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
@@ -150,10 +206,10 @@ color: whitesmoke !important;
                 <!-- /.navbar-collapse -->         
 
             </div>
+            
             <div class="horizontal-line"></div>
             <!-- /.container-fluid -->
         </nav>
-
 
 
         <section id="main-menu" class="green-back ">
@@ -179,7 +235,7 @@ color: whitesmoke !important;
            
            
   		<div class="wrap cf">
-			<div class="heading cf">
+			<div class="heading cf center-divs-mobile">
 			  
                 <form action="{% url 'update_cart' %}" method="post" >
 
@@ -192,32 +248,32 @@ color: whitesmoke !important;
 			</div>
 			<div class="cart">
 
-			  <ul class="cartWrap">
+			  <div class="cartWrap">
 				{% for order_item in order_items %}
 				<li class="items odd">
 				  
 			  <div class="infoWrap"> 
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="custom-col ">
 				  <img src="{{ order_item.menu_item.image.url }}" alt="" class="itemImg" />
                 </div>  
                 
-                    <div class="col-xs-3 col-md-2">
+                    <div class="custom-col">
 					<h3>{{ order_item.menu_item.name }}</h3>
                 </div>
-                <div class="col-xs-3">
-					 <p> <input style="width: 30%;" name="quantity" type="number" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price }}</span></p>
+                <div class="custom-col">
+					 <p style="white-space: nowrap;"> <input style="width: 30%;" name="quantity" type="number" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price }}</span></p>
 					 <input type="hidden" name="product_id" value="{{ order_item.menu_item.id }}">
                     </div>
 					
 				
 			  
 				  
-				  <div class="prodTotal cartSection col-xs-2 col-md-3">
+				  <div class="prodTotal cartSection custom-col">
 					<p><span class="small-currency">€</span>{{ order_item.get_total_item_price }}</p>
 				  </div>
-				  &nbsp;
-						<div style="margin-top: -10px;" class="cartSection removeWrap col-xs-1">
+				 
+				<div  class="cartSection removeWrap custom-col">
 					 <a href="#" class="remove" data-product-id="{{ order_item.menu_item.id }}">x</a>
 				  </div>
 				</div>
@@ -238,13 +294,14 @@ color: whitesmoke !important;
 			<div class="subtotal cf">
 			  <ul class="list-unstyled">
 
-				
+				<div class="center-divs-mobile">
 				<li class="totalRow final"><span class="label">Total</span>
 					<span id="final-total" class="value">€ {{total_price}}
 					</span></li>
+                </div>
 				<li class="totalRow"><a href="{% url 'checkout' %}" class="btn continue">ZUR KASSE</a>
 				</li>
-			  </ul>
+			  </div>
 			</div>
 
 		</form>
@@ -320,7 +377,7 @@ color: whitesmoke !important;
 					var totalQuantity = data.cart_items_count;
 
 					// Display the badge and animate it
-					$('#cart-badge').text(totalQuantity).show().animate({
+					$('.cart-badge').text(totalQuantity).show().animate({
 							fontSize: '16px',
 						}, 200).animate({
 							fontSize: '12px',

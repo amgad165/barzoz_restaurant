@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
 
-    <title>BAZROZ</title>
+    <title>BARZOZ</title>
 
 {% include "includes/links.html" %}
 
@@ -63,7 +63,7 @@ body{
 }
 .menu-image{
 width: 100%;
-max-height: 150px;
+
 }
 .menu-title , .menu-description{
     color: #c6a880 !important;
@@ -75,9 +75,12 @@ max-height: 150px;
     line-height: 20px;
     font-size: 15px;
     margin-top: 10px;
+    overflow: hidden;
+    white-space: normal;
 }
 .menu-title{
-    font-size: 19px;
+    font-size: 26px;
+    
 }
 
 .menu-cart{
@@ -95,6 +98,7 @@ padding: 0px 10px 0px 10px !important;
 }
 .menu-cart i {
     color: #c6a880;
+    
 }
 
 .menu-cart:hover i{
@@ -117,6 +121,37 @@ color: whitesmoke !important;
 }
 }
 
+@media(max-width: 767px) {
+
+.menu-cart{
+font-size: 15px !important;
+
+}
+
+.menu-description{
+font-size: 8px;
+letter-spacing: 2px;
+overflow: hidden;
+white-space: normal; /* This allows the text to wrap to the next line */
+/* Optionally, you can set a max-width or width for responsiveness */
+max-width: 100%;
+margin-top: 2px;
+}
+
+.menu-item-info h3 {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+.menu-title {
+    letter-spacing: 2px;
+}  
+.heading_div{
+margin-bottom: 15px;
+}
+.section-inner {
+padding: 20px 0;
+}
+}
 
 </style>
 
@@ -139,12 +174,8 @@ color: whitesmoke !important;
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+
+                    <a class="navbar-toggle visible-sm visible-xs" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
                     <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
                     
                    <a class="navbar-brand smoothie" href="{% url 'home' %}">BAZROZ</span></a>
@@ -154,7 +185,7 @@ color: whitesmoke !important;
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span id="cart-badge">{{ total_quantity }}</span></a></li>      
+                        <li><a href="{% url 'cart' %} " class="page-scroll"> W A R E N K O R B   <i  id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
@@ -183,7 +214,7 @@ color: whitesmoke !important;
 
                  <div class="container wow fadeIn">
                     <div class="row">
-                        <div class="col-lg-12 text-center mb50">
+                        <div class="col-lg-12 text-center mb50 heading_div">
                             <h2 class="section-heading"><img src="{% static 'assets/img/bg/title_icon.png' %}" alt="">&nbsp;&nbsp; {{ category }} &nbsp;&nbsp;<img src="{% static 'assets/img/bg/title_icon.png' %}" alt=""></h2>
                         </div>
                     </div>
@@ -227,7 +258,7 @@ color: whitesmoke !important;
                                     </div>
                                         <div class="row">
                                         <div class="col-xs-8">
-                                        <p class="menu-description">{{ item.description }}</p>
+                                        <p class="menu-description">{{ item.description }} </p>
                                     </div>
                                 </div>
                                     
@@ -328,7 +359,7 @@ color: whitesmoke !important;
 
                     // $('#total-quantity').text(totalQuantity);
 					// Display the badge and animate it
-					$('#cart-badge').text(totalQuantity).show().animate({
+					$('.cart-badge').text(totalQuantity).show().animate({
 							fontSize: '16px',
 						}, 200).animate({
 							fontSize: '12px',
