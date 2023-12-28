@@ -124,22 +124,23 @@ color: whitesmoke !important;
 @media(max-width: 767px) {
 
 .menu-cart{
-font-size: 15px !important;
+    font-size: 10px !important;
+    padding: 5px !important;
 
 }
 
 .menu-description{
-font-size: 8px;
+font-size: 6px;
 letter-spacing: 2px;
 overflow: hidden;
 white-space: normal; /* This allows the text to wrap to the next line */
 /* Optionally, you can set a max-width or width for responsiveness */
 max-width: 100%;
-margin-top: 2px;
+margin-top: 0px;
 }
 
 .menu-item-info h3 {
-    font-size: 12px;
+    font-size: 8px;
     letter-spacing: 2px;
 }
 .menu-title {
@@ -151,6 +152,8 @@ margin-bottom: 15px;
 .section-inner {
 padding: 20px 0;
 }
+
+
 }
 
 </style>
@@ -237,7 +240,7 @@ padding: 20px 0;
                                         
                                         <div class="menu-item-info">
                                             <div class="col-2">
-                                            <h3 class="menu-title">{{ item.name }}</h3>
+                                            <h3 style="white-space: nowrap;" class="menu-title">{{ item.name }}</h3>
                                         </div>
 
                                         
@@ -245,7 +248,7 @@ padding: 20px 0;
                                                 <div class="line"></div>
                                                 <div class="line"></div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-xs-2">
                                             <h3>€{{ item.price }}</h3>
                                         </div>
 

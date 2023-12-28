@@ -2176,10 +2176,16 @@ h3.section-subheading{
 .about_image{
     width: 185px;
     height: 200px;
+}
+
+.section-heading img{
+    width: 45px;
+
+
 } 
 }
 
-}
+
 
 
 @media (min-width: 1400px){
