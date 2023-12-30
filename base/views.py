@@ -19,8 +19,11 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
 def home(request):
+    categories = Category.objects.filter(view_homepage=True)
     menu_items_by_category = {}
-    menu_items_by_category['UNSERE  SPEZIALITÄTEN'] = Menu_Item.objects.filter(category__name='UNSERE  SPEZIALITÄTEN')
+
+    for category in categories:
+        menu_items_by_category[category.name] = Menu_Item.objects.filter(category=category)
     context = {'menu_items_by_category': menu_items_by_category}
     return render(request,"index.html", context)
 

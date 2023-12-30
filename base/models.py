@@ -6,10 +6,12 @@ from django.conf import settings
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    view_homepage = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.name
-
+    
 class Menu_Item(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
