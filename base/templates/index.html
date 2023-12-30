@@ -72,7 +72,7 @@
                     
                     <a class="logo smoothie" href="{% url 'home'  %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
                     
-                   <a class="navbar-brand smoothie visible-md visible-lg" href="{% url 'home'  %}">BAZROZ</span></a>
+                   <a class="navbar-brand smoothie  visible-lg" href="{% url 'home'  %}">BAZROZ</span></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -124,8 +124,8 @@
         
         <section id="about" class="covered-section green-back">
 
-            <div class="vertical-line1 visible-md visible-lg"></div>
-            <div class="vertical-line2 visible-md visible-lg"></div>
+            <div class="vertical-line1 visible-lg"></div>
+            <div class="vertical-line2  visible-lg"></div>
 
             <div class="section-inner">
 
@@ -148,17 +148,17 @@
                 <div>
                     <div class="container">
                         <div class="row wow fadeIn">
-                            <div class="col-md-4 col-xs-6">
+                            <div class="col-lg-4 col-xs-6">
                             
                                 <img class="about_image" src="{% static 'assets/img/bg/about2.jpg' %}" alt="">
                             </div>
 
-                            <div  class="col-md-4 col-12 visible-md visible-lg">
+                            <div  class="col-md-4  visible-lg">
                                 
                                 <img class="about_image" src="{% static 'assets/img/bg/about-middle.png' %}" alt="">
 
                             </div>
-                            <div class="col-md-4 col-xs-6">
+                            <div class="col-lg-4 col-xs-6">
                                 <img class="about_image" src="{% static 'assets/img/bg/about1.jpg' %}" alt="">
                                     </div>
                     </div>
@@ -223,19 +223,20 @@
 
 
                     </div>
-                        <div style="display: flex;align-items: center;justify-content: center; margin-top: 25px;" class="row">
-                            <div  class="col-3">
-                                
-                          <a href="{% url 'main_menu'  %}"><button type="button" class="custom-button btn btn-primary">S P E I S E K A R T E</button></a>  
-                        </div>
-                           </div>
+        
                              
                         
                     
                 </div>
               
-                
+
                 {% endfor %}
+                <div style="display: flex;align-items: center;justify-content: center; margin-top: 25px;" class="row">
+                    <div  class="col-3">
+                        
+                  <a href="{% url 'main_menu'  %}"><button type="button" class="custom-button btn btn-primary">S P E I S E K A R T E</button></a>  
+                </div>
+                   </div>
             </div>
         </section>
 

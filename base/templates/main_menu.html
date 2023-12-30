@@ -130,7 +130,7 @@ color: whitesmoke !important;
 }
 
 .menu-description{
-font-size: 6px;
+font-size: 8px;
 letter-spacing: 2px;
 overflow: hidden;
 white-space: normal; /* This allows the text to wrap to the next line */
@@ -140,7 +140,7 @@ margin-top: 0px;
 }
 
 .menu-item-info h3 {
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: 2px;
 }
 .menu-title {
@@ -174,11 +174,11 @@ padding: 20px 0;
 
         <!-- Navigation -->
         <nav class="navbar navbar-default " data-wow-delay="0.2s">
-            <div class="container-fluid">
+            <div class="container-fluid components-right-adjust">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll">
+                <div class="navbar-header page-scroll ">
 
-                    <a class="navbar-toggle visible-sm visible-xs" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
+                    <a class="navbar-toggle  visible-xs" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
                     <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
                     
                    <a class="navbar-brand smoothie visible-md visible-lg" href="{% url 'home' %}">BAZROZ</span></a>
@@ -208,8 +208,8 @@ padding: 20px 0;
 
         <section id="main-menu" class="green-back ">
 
-            <div class="vertical-line1 visible-xl visible-lg"></div>
-            <div class="vertical-line2 visible-xl visible-lg"></div>
+            {% comment %} <div class="vertical-line1 visible-xl visible-lg"></div>
+            <div class="vertical-line2 visible-xl visible-lg"></div> {% endcomment %}
             <div class="section-inner">
 
 
@@ -233,10 +233,10 @@ padding: 20px 0;
                             
                             <div class="food-menu-item">
                                 <div class="row">
-                                    <div class="col-xs-3 col-md-2">
+                                    <div class="col-xs-3 col-sm-2">
                                         <img class="menu-image" src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
                                     </div>
-                                    <div class="col-xs-9 col-md-10">
+                                    <div class="col-xs-9 col-sm-10">
                                         
                                         <div class="menu-item-info">
                                             <div class="col-2">
@@ -316,22 +316,7 @@ padding: 20px 0;
 
 
 
-<script>
-    $(document).ready(function() {
-        // Calculate the total height of the covered sections
-        var totalHeight = 0;
-        $(".covered-section").each(function() {
-            console.log(totalHeight)
-            totalHeight += $(this).height();
 
-});
-
-        // Set the height of the vertical line
-        $(".vertical-line1").height(totalHeight);
-        $(".vertical-line2").height(totalHeight);
-
-    });
-</script>
 
 
 
