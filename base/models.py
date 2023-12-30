@@ -15,7 +15,7 @@ class Menu_Item(models.Model):
     description = models.CharField(max_length=255)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='assets/img/food/')
+    image = models.FileField(upload_to='menu_images')
 
     def __str__(self):
         return self.name
