@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
-from django.http import JsonResponse
+from django.http import HttpResponseServerError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Menu_Item, OrderItem, Order, Category , Coupon , User_details
 from django.contrib.sessions.models import Session
@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
+from django.core.mail import send_mail
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -369,6 +370,7 @@ def add_coupon(request):
 
 
 
+
 def confirm_order(request):
     session_key = request.session.session_key
     
@@ -377,17 +379,29 @@ def confirm_order(request):
         order_items = order.items.all()
         
         order_items.update(ordered=True)
+        items_lists = []
         for item in order_items:
             item.save()
+            items_lists.append(str(item))
 
         order.ordered = True
         order.save()
 
+        items_lists = ', '.join(items_lists)
+        message= 'your order :  '+items_lists+ ' will be ready soon'
+        email_from = settings.EMAIL_HOST_USER
+        client_email = [order.user_details.email]
+
+        send_mail('Order', message, from_email=email_from ,recipient_list=client_email, fail_silently=False)
+
+
         return render(request,"success.html")  
-    
+
     except Exception as e:
-        # send an email to ourselves
-        return Response({"message": "A serious error occurred. We have been notifed."}, status=HTTP_400_BAD_REQUEST)
+        
+        
+        return HttpResponseServerError("A serious error occurred. We have been notified.", content_type="text/plain")
+
 
 
 

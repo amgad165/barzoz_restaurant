@@ -222,9 +222,9 @@ img::-moz-selection {
     background: 0 0
 }
 
-body {
+/* body {
     webkit-tap-highlight-color: #333
-}
+} */
 
 .img-responsive,
 .thumbnail>img,
@@ -365,7 +365,7 @@ body {
 .btn-primary.btn-transparent.active {
     color: #fff;
     border-color: transparent #c6a880 ;
-    background-color: #c6a880 ; !important
+    background-color: #c6a880 !important; 
 }
 
 .btn-primary:hover,
@@ -625,7 +625,6 @@ margin-right: 140px !important;
 
 #navbar-social {
     display: inline-block;
-    float: left;
     padding: 23px 20px 0 20px;
 }
 
@@ -1053,9 +1052,7 @@ footer.white-wrapper .social-links li a {
 /*-----------------------------------------------------------------------------------*/
 /*  12 - CAROUSEL STYLES
 /*-----------------------------------------------------------------------------------*/
-.fw-carousel .owl-item {
-    /* padding: 0 */
-}
+
 
 .fw-carousel .hover-item-caption h3 {
     font-size: 20px
@@ -1476,7 +1473,7 @@ footer.white-wrapper .social-links li a {
 #countdown span {
   width: 25%;
   display:inline-block;
-  float:left;
+  
   font-size:56px;
   font-weight:900
 }
@@ -1703,7 +1700,7 @@ footer.white-wrapper .social-links li a {
 @media(max-width:460px) {
     .fullheight, .fullheight .article-slide, .fullheight .article-slide .carousel-inner, .fullheight .article-slide .item, .fullheight .article-slide .item img {
         height: auto!important;
-        min-height: 400px
+        min-height: 852px
     }
     header .intro-text .intro-heading img {
         max-width: 260px;
@@ -2155,17 +2152,17 @@ section.tangaroa-back{
 }
 .section-heading{
     color: #c6a880;
-    font-family: futurelight;
+    font-family: futurebook;
     font-size: 50px;
     
 }
 
 h3.section-subheading{
     color: #c6a880;
-    font-family: futurelight; 
+    font-family: futurebook;
     font-size: 18px; 
     letter-spacing: 6px;
-    font-weight: 600;
+    
 }
 
 .about_image{
@@ -2174,8 +2171,8 @@ h3.section-subheading{
 }
 @media(max-width: 767px) {
 .about_image{
-    width: 100%;
-    height: 200px;
+    width: 215px;
+    height: 321px;
 }
 
 .section-heading img{
@@ -2264,24 +2261,29 @@ h3.section-subheading{
 @media(max-width: 767px) {
 
 #contact p {
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 3px;
     
 }
 
 .contact_icon {
-    font-size: 10px;
+    font-size: 15px;
     margin-bottom: 20px;
     letter-spacing: 3px;
+    font-family: futurebook;
+font-weight: normal;
+    display: grid;
+
 }
 .contact_icon i{
-    font-size: 18px;
+    font-size: 28px;
+    margin-right: 0px;
 
 }
 
 #contact iframe{
-    width: 100%;
-    height: auto;
+    width: 306px;
+    height: 284px;
 }
 
 
@@ -2330,6 +2332,25 @@ width: 67px;
 
 
 @media(max-width: 768px) {
+
+    header .intro-text .intro-heading p {
+        font-size: 15px !important;
+        font-family: futurebook;
+        text-transform: capitalize;
+        color: #c6a880;
+    }
+    header .intro-text .intro-heading .intro_description {
+        font-size: 10px !important;
+        font-family: futureheavy !important;
+        letter-spacing: 2px;
+
+    }
+    .heading-font h1 {
+        font-size: 57px;
+        font-family: futureheavy !important;
+        letter-spacing: 8px;
+    }
+
   .logo img{
     width: 40px;
     height: 47px;
@@ -2360,22 +2381,34 @@ background-color: #c6a880 !important;
 }
 
 .section-heading {
-    font-size: 15px !important;
-    letter-spacing: 0px !important;
+    font-size: 26px !important;
+    letter-spacing: 3px !important;
 }
 .section-subheading{
-    font-size: 14px !important;
-    letter-spacing: 0px !important;
-    font-weight: 400 !important;
+    font-size: 15px !important;
+    letter-spacing: 3px !important;
+    
 }
 
 
 .menu-item-info h3 {
 
-font-size: 18px;
+font-size: 12px;
+}
+.custom-button {
+font-size: 12px;
 }
 footer h1{
-    font-size: 60px !important;
+    font-size: 20px !important;
+    letter-spacing: 6px !important;
+}
+
+footer p {
+   
+    font-size: 9px;
+
+    line-height: 6px;
+
 }
 }
 
