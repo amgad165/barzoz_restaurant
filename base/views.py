@@ -16,6 +16,9 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.utils.decorators import method_decorator
+
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -159,7 +162,7 @@ def checkout(request):
         order_items = None    
         return render(request, "checkout.html", {'order_items': order_items})
 
-@csrf_protect
+@method_decorator(csrf_exempt, name='dispatch')
 class CreateStripeCheckoutSessionView(View):
 
 
