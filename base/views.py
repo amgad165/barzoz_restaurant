@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -39,6 +40,7 @@ def main_menu(request):
     
     return render(request, "main_menu.html", context)
 
+@csrf_protect
 def add_to_cart(request):
     
     if request.method == 'POST':
@@ -108,6 +110,7 @@ def cart(request):
         return render(request, "cart.html", {'order_items': order_items})
 
 
+@csrf_protect
 def update_cart(request):
     if request.method == "POST":
         # Process the data sent by the "Update Cart" button
@@ -156,7 +159,7 @@ def checkout(request):
         order_items = None    
         return render(request, "checkout.html", {'order_items': order_items})
 
-
+@csrf_protect
 class CreateStripeCheckoutSessionView(View):
 
 
@@ -305,7 +308,7 @@ class CancelView(TemplateView):
 
 
 
-
+@csrf_protect
 def remove_item(request):
     if request.method == "POST":
         product_id = request.POST.get('product_id')
