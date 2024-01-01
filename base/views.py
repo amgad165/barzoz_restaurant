@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -28,6 +29,7 @@ def home(request):
     context = {'menu_items_by_category': menu_items_by_category}
     return render(request,"index.html", context)
 
+@csrf_protect
 def main_menu(request):
     categories = Category.objects.all()
     menu_items_by_category = {}
