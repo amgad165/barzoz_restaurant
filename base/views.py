@@ -29,7 +29,7 @@ def home(request):
     context = {'menu_items_by_category': menu_items_by_category}
     return render(request,"index.html", context)
 
-@csrf_protect
+
 def main_menu(request):
     categories = Category.objects.all()
     menu_items_by_category = {}
@@ -41,6 +41,7 @@ def main_menu(request):
     
     return render(request, "main_menu.html", context)
 
+@csrf_protect
 def add_to_cart(request):
     
     if request.method == 'POST':
