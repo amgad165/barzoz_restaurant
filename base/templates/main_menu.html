@@ -265,7 +265,7 @@ padding: 20px 0;
                                         </div>
 
                                         <div class="col-2">
-                                           
+                             {% csrf_token %}
                                             <button  data-item-id="{{ item.id }}"  class="menu-cart btn btn-primary add-to-cart-button"><i  class="fa fa-shopping-cart "></i></button>
                                             
                                         </div>
@@ -335,43 +335,40 @@ padding: 20px 0;
 
 
 <script>
-    $(document).ready(function() {
-        
-        $('.add-to-cart-button').click(function() {
+$(document).ready(function() {
+    $('.add-to-cart-button').click(function() {
+        var itemId = $(this).data('item-id');
+        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val(); // Get CSRF token from the hidden input
+        var data = {
+            id: itemId,
+            'csrfmiddlewaretoken': csrfToken
+        };
 
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'add_to_cart' %}',
+            data: data,
+            headers: {
+                'X-CSRFToken': csrfToken // Include CSRF token in the headers
+            },
+            success: function(response) {
+                // Update the total quantity in the cart display
+                var totalQuantity = response.cart_items_count;
 
-            var itemId = $(this).data('item-id');
-            // var quantity = parseInt($('#quantity').val());
-            var data = {
-                id: itemId,
-                // qty: quantity,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            };
-            
-            $.ajax({
-                type: 'POST',
-                url: '{% url 'add_to_cart' %}',
-                data: data,
-                success: function(response) {
-
-                    // Update the total quantity in the cart display
-                    var totalQuantity = response.cart_items_count
-
-                    // $('#total-quantity').text(totalQuantity);
-					// Display the badge and animate it
-					$('.cart-badge').text(totalQuantity).show().animate({
-							fontSize: '16px',
-						}, 200).animate({
-							fontSize: '12px',
-						}, 200);
-
-                },
-                error: function(xhr) {
-                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
-                }
-            });
+                // Display the badge and animate it
+                $('.cart-badge').text(totalQuantity).show().animate({
+                    fontSize: '16px',
+                }, 200).animate({
+                    fontSize: '12px',
+                }, 200);
+            },
+            error: function(xhr) {
+                alert('Error: ' + xhr.status + ' ' + xhr.responseText);
+            }
         });
     });
+});
+
 </script>
 
 
