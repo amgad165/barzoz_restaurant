@@ -444,7 +444,26 @@ fieldset[disabled] .btn-primary.active {
 
 .theme-accent-color, .navbar-default.navbar-shrink #navbar-social a:hover, .navbar-default .nav li a:hover {
     color: #c6a880  !important;
+    
+    
 }
+.navbar-default .nav li a::before {
+    transition: 300ms;
+    height: 5px;
+    content: "";
+    position: absolute;
+    background-color: #c6a880;
+  }
+  .navbar-default .nav li a::before {
+    width: 0%;
+    bottom: 10px;
+  }
+
+  .navbar-default .nav li a:hover::before {
+    width: 100%;
+  }
+
+
 
 .theme-accent-color-bg {
     background-color: #F22613;
@@ -494,10 +513,11 @@ fieldset[disabled] .btn-primary.active {
 .navbar-default .nav li a {
     text-transform: uppercase;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
     color: #fff;
 
-    padding: 25px 20px;
+    padding: 25px 0px;
+    margin-right: 30px;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
@@ -1658,7 +1678,7 @@ footer.white-wrapper .social-links li a {
         word-wrap: break-word;
      }
      .navbar-default .nav li a {
-        font-size: 13px;
+        font-size: 12px;
         padding: 10px 15px;
      }
      #navbar-social, #header-scroll-wrapper {
@@ -2093,7 +2113,7 @@ a#back-to-top.show {
     width: 100%;
     height: 1px;
     background-color: #c6a880; 
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .vertical-line1 {
@@ -2118,8 +2138,8 @@ a#back-to-top.show {
 
 }
 .logo img{
-    width: 100px;
-    height: 110px;
+    width: 80px;
+    height: 90px;
     margin-left: -20px;
     margin-top: -15px;
     margin-right: 50px;
@@ -2133,8 +2153,9 @@ a#back-to-top.show {
     color: #c6a880 ;  
 }
  .navbar-default .navbar-brand, .navbar-default .nav li a {
-    font-family: futurelight;
+    font-family: futurebook;
     text-transform: uppercase;
+    margin-left: -5px !important;
 }
 
 header .intro-text .intro-heading p{
@@ -2169,7 +2190,7 @@ h3.section-subheading{
 }
 
 .about_image{
-    width: 400px;
+    width: 100%;
     height: 425px;
 }
 @media(max-width: 767px) {
@@ -2384,7 +2405,7 @@ background-color: #c6a880 !important;
 }
 
 .section-heading {
-    font-size: 26px !important;
+    font-size: 14px !important;    
     letter-spacing: 3px !important;
 }
 .section-subheading{
@@ -2392,15 +2413,32 @@ background-color: #c6a880 !important;
     letter-spacing: 3px !important;
     
 }
+#about .section-heading{
+    font-size: 26px !important;
+
+}
+
+#the-menu .section-heading{
+    font-size: 19px !important;
+}
+
+#contact .section-heading{
+    font-size: 20px; 
+    font-family: futuremedium;
+}
 
 
 .menu-item-info h3 {
 
 font-size: 12px;
+margin-top: 10px;
 }
 .food-menu-item p {
     font-size: 10px;
+    
 }
+
+
 .custom-button {
 font-size: 12px;
 }
@@ -2411,7 +2449,7 @@ footer h1{
 
 footer p {
    
-    font-size: 9px;
+    font-size: 9px !important;
 
     line-height: 6px;
 
@@ -2479,6 +2517,7 @@ footer p {
     }
     .menu-item-info h3{
         font-size: 22px;
+        margin-top: 5px;
     }
     .components-right-adjust #cart{
         font-size: 21px ;
@@ -2510,7 +2549,8 @@ footer p {
     
         .navbar-default .nav li a {
             font-size: 11px;
-            padding: 30px 10px;
+            padding: 30px 0px;
+            margin-right: 20px;
     
         }
         
@@ -2559,7 +2599,7 @@ footer p {
         
             .navbar-default .nav li a {
                 font-size: 15px;
-                padding: 30px 10px;
-        
+                padding: 30px 0px;
+                margin-right: 20px;
             }
             }

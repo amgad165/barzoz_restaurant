@@ -19,7 +19,7 @@ admin.site.register(Coupon, CouponAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_summary', 'get_user_name', 'get_user_telefon', 'get_user_email',
-                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'get_city', 'ordered_date',
+                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date',
                     'get_total')
 
 
@@ -59,9 +59,7 @@ class OrderAdmin(admin.ModelAdmin):
         return obj.user_details.plz_zip if obj.user_details else ""
     get_plz_zip.short_description = 'PLZ/ZIP'
 
-    def get_city(self, obj):
-        return obj.user_details.city if obj.user_details else ""
-    get_city.short_description = 'City'
+
 
     def um_hinweise(self, obj):
         return obj.user_details.um_hinweise if obj.user_details else ""

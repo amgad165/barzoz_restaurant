@@ -171,12 +171,11 @@ class CreateStripeCheckoutSessionView(View):
         street_address = request.POST.get('street_address')     
         hausnummer = request.POST.get('hausnummer')
         plz_zip = request.POST.get('plz_zip')     
-        city = request.POST.get('city')
         telefon = request.POST.get('telefon')     
         email = request.POST.get('email')
         um_hinweise = request.POST.get('um_hinweise')
 
-        user_details_obj = User_details.objects.create(vorname=vorname,nachname=nachname,bezirk=bezirk,street_address=street_address,hausnummer=hausnummer,plz_zip=plz_zip,city=city, telefon= telefon ,email = email, um_hinweise=um_hinweise)
+        user_details_obj = User_details.objects.create(vorname=vorname,nachname=nachname,bezirk=bezirk,street_address=street_address,hausnummer=hausnummer,plz_zip=plz_zip, telefon= telefon ,email = email, um_hinweise=um_hinweise)
         user_details_obj.save()
 
         order = Order.objects.get(id=self.kwargs["pk"])

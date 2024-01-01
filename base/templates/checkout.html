@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
 
-    <title>BAZROZ</title>
+    <title>BARZOZ</title>
 
 {% include "includes/links.html" %}
 
@@ -150,7 +150,14 @@ padding: 10px !important;
 }
 }
 
+@media (min-width: 1700px){
+.navbar-brand{
+   
+    margin-top: 10px !important;
 
+    
+}
+}
 
     </style>
 
@@ -261,9 +268,13 @@ padding: 10px !important;
                             </div>
 
 
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Bezirk *</label>
-                                <input required name="bezirk" type="input" class="form-control" id="exampleInputEmail1" >
+           
+                              <div class="form-group">
+                                <label for="exampleFormControlSelect1">Bezirk *</label>
+                                <select required name="bezirk" class="form-control" id="exampleFormControlSelect1">
+                                  <option>Mödling</option>
+
+                                </select>
                               </div>
                               
                               <div class="form-group">
@@ -279,13 +290,7 @@ padding: 10px !important;
                               </div>
 
    
-                              <div class="form-group">
-                                <label for="exampleFormControlSelect1">Stadt / City *</label>
-                                <select required name="city" class="form-control" id="exampleFormControlSelect1">
-                                  <option>city 1</option>
-
-                                </select>
-                              </div>
+          
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Telefon *</label>
                                 <input required name="telefon" type="input" class="form-control" id="exampleInputEmail1" >
@@ -354,17 +359,17 @@ padding: 10px !important;
                             <p style="font-size: 18px; margin-bottom: 20px;">Zahlung Methoden</p>
 
                             <div  class="form-check">
-                                <input  class="form-check-input custom-control-input" type="radio" value="on_delivery" name="payment_type" id="flexRadioDefault1">
+                                <input  class="form-check-input custom-control-input" type="radio" value="on_delivery" name="payment_type" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                   Cash on delivery
                                 </label>
                               </div>
-                              <div class="form-check">
-                                <input  class="form-check-input" type="radio" value="karte" name="payment_type" id="flexRadioDefault2" checked>
+                              <!-- <div class="form-check">
+                                <input  class="form-check-input" type="radio" value="karte" name="payment_type" id="flexRadioDefault2" >
                                 <label class="form-check-label" for="flexRadioDefault2">
                                   Karte
                                 </label>
-                              </div>
+                              </div> -->
                         </div>
                         <p class="details"> Your personal data will be used to process your order , support your experience throught this website, and for other purposes descrived in our terms</p>
                             <button type="submit" class="custom-button btn btn-primary">ZAHLEN</button>

@@ -83,7 +83,6 @@ class User_details(models.Model):
     street_address = models.CharField(max_length=255)
     hausnummer = models.CharField(max_length=255)
     plz_zip = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
     telefon = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     um_hinweise = models.CharField(max_length=500,null=True, blank= True)
