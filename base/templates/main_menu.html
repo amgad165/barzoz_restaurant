@@ -217,6 +217,7 @@ padding: 20px 0;
         </nav>
 
 
+
         <section id="main-menu" class="green-back">
             <div class="section-inner">
                 {% for category, menu_items in menu_items_by_category.items %}
@@ -250,7 +251,13 @@ padding: 20px 0;
                                                         <h3>€{{ item.price }}</h3>
                                                     </div>
                                                     <div class="col-2">
-                                                        <button data-item-id="{{ item.id }}" class="menu-cart btn btn-primary add-to-cart-button"><i class="fa fa-shopping-cart"></i></button>
+                                                        <form id="add-to-cart-form" method="POST" action="{% url 'add_to_cart' %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="id" value="{{ item.id }}">
+                                                            <button type="submit" class="menu-cart btn btn-primary add-to-cart-button">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,36 +316,38 @@ padding: 20px 0;
 
 
 <script>
-  $(document).ready(function() {
-    $('.add-to-cart-button').click(function() {
-        var itemId = $(this).data('item-id');
-        var csrfToken = '{{ csrf_token }}';
+    $(document).ready(function() {
+        $('#add-to-cart-form').submit(function(e) {
+            e.preventDefault();
+            var form = $(this);
+            var itemId = form.find('input[name="id"]').val();
+            var csrfToken = form.find('input[name="csrfmiddlewaretoken"]').val();
 
-        var data = {
-            id: itemId,
-            'csrfmiddlewaretoken': csrfToken
-        };
+            var data = {
+                id: itemId,
+                csrfmiddlewaretoken: csrfToken
+            };
 
-        $.ajax({
-            type: 'POST',
-            url: '{% url 'add_to_cart' %}',
-            data: data,
-            success: function(response) {
-                var totalQuantity = response.cart_items_count;
-                $('.cart-badge').text(totalQuantity).show().animate({
-                    fontSize: '16px',
-                }, 200).animate({
-                    fontSize: '12px',
-                }, 200);
-            },
-            error: function(xhr) {
-                alert('Error: ' + xhr.status + ' ' + xhr.responseText);
-            }
+            $.ajax({
+                type: 'POST',
+                url: form.attr('action'),
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    var totalQuantity = response.cart_items_count;
+                    $('.cart-badge').text(totalQuantity).show().animate({
+                        fontSize: '16px',
+                    }, 200).animate({
+                        fontSize: '12px',
+                    }, 200);
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
+                }
+            });
         });
     });
-});
 </script>
-
 
 
 

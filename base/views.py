@@ -40,6 +40,9 @@ def main_menu(request):
     context = {'menu_items_by_category': menu_items_by_category}
     
     return render(request, "main_menu.html", context)
+
+
+@csrf_exempt  # Add this decorator to bypass CSRF for this view
 def add_to_cart(request):
     if request.method == 'POST':
         menu_item_id = request.POST.get('id')
