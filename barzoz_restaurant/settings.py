@@ -117,7 +117,7 @@ USE_I18N = True
 USE_TZ = True
 
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 CSRF_COOKIE_SECURE = True
 
 # Static files (CSS, JavaScript, Images)
