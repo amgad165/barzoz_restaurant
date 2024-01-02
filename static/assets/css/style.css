@@ -343,7 +343,7 @@ body {
     border-radius: 0;
     text-transform: uppercase;
     font-weight: 700;
-    color: #333;
+    color: #c6a880;
     background-color: transparent;
     padding: 15px 20px;
     letter-spacing: 1px;
@@ -365,7 +365,7 @@ body {
 .btn-primary.btn-transparent.active {
     color: #fff;
     border-color: transparent #c6a880 ;
-    background-color: #c6a880 ; !important
+    background-color: #c6a880 !important; 
 }
 
 .btn-primary:hover,
