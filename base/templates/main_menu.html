@@ -217,83 +217,57 @@ padding: 20px 0;
         </nav>
 
 
-
-        <section id="main-menu" class="green-back ">
-
-            {% comment %} <div class="vertical-line1 visible-xl visible-lg"></div>
-            <div class="vertical-line2 visible-xl visible-lg"></div> {% endcomment %}
+        <section id="main-menu" class="green-back">
             <div class="section-inner">
-
-
-{% for category, menu_items in menu_items_by_category.items %}
-
-                 <div class="container wow fadeIn">
-                    <div class="row">
-                        <div class="col-lg-12 text-center mb50 heading_div">
-                            <h2 class="section-heading"><img src="{% static 'assets/img/bg/title_icon.png' %}" alt="">&nbsp;&nbsp; {{ category }} &nbsp;&nbsp;<img src="{% static 'assets/img/bg/title_icon.png' %}" alt=""></h2>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container">
-
-                    <div class="row wow fadeIn">
-                        <div class="col-md-12 ">
-                        
-                              {% for item in menu_items %}
-                            
-                            
-                            <div class="food-menu-item">
-                                <div class="row">
-                                    <div class="col-xs-3 col-sm-2">
-                                        <img class="menu-image" src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
-                                    </div>
-                                    <div class="col-xs-9 col-sm-10">
-                                        
-                                        <div class="menu-item-info">
-                                            <div class="col-2">
-                                            <h3 style="white-space: nowrap;" class="menu-title">{{ item.name }}</h3>
-                                        </div>
-
-                                        
-                                            <div class="vertical-lines col-2">
-                                                <div class="line"></div>
-                                                <div class="line"></div>
-                                            </div>
-                                            <div class="col-xs-2">
-                                            <h3>€{{ item.price }}</h3>
-                                        </div>
-
-                                        <div class="col-2">
-                        
-                                            <button  data-item-id="{{ item.id }}"  class="menu-cart btn btn-primary add-to-cart-button"><i  class="fa fa-shopping-cart "></i></button>
-                                            
-                                        </div>
-                                        </div>
-                                    </div>
-                                        <div class="row">
-                                        <div class="col-xs-8">
-                                        <p class="menu-description">{{ item.description }} </p>
-                                    </div>
-                                </div>
-                                    
-                                </div>
+                {% for category, menu_items in menu_items_by_category.items %}
+                    <div class="container wow fadeIn">
+                        <div class="row">
+                            <div class="col-lg-12 text-center mb50 heading_div">
+                                <h2 class="section-heading"><img src="{% static 'assets/img/bg/title_icon.png' %}" alt="">&nbsp;&nbsp; {{ category }} &nbsp;&nbsp;<img src="{% static 'assets/img/bg/title_icon.png' %}" alt=""></h2>
                             </div>
-                            {% endfor %}
-
-
-
-
                         </div>
-
-        
                     </div>
-                </div>
+                    
+                    <div class="container">
+                        <div class="row wow fadeIn">
+                            <div class="col-md-12">
+                                {% for item in menu_items %}
+                                    <div class="food-menu-item">
+                                        <div class="row">
+                                            <div class="col-xs-3 col-sm-2">
+                                                <img class="menu-image" src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
+                                            </div>
+                                            <div class="col-xs-9 col-sm-10">
+                                                <div class="menu-item-info">
+                                                    <div class="col-2">
+                                                        <h3 style="white-space: nowrap;" class="menu-title">{{ item.name }}</h3>
+                                                    </div>
+                                                    <div class="vertical-lines col-2">
+                                                        <div class="line"></div>
+                                                        <div class="line"></div>
+                                                    </div>
+                                                    <div class="col-xs-2">
+                                                        <h3>€{{ item.price }}</h3>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <button data-item-id="{{ item.id }}" class="menu-cart btn btn-primary add-to-cart-button"><i class="fa fa-shopping-cart"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <p class="menu-description">{{ item.description }} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-
             </div>
         </section>
-
 
 
 
@@ -335,43 +309,34 @@ padding: 20px 0;
 
 
 <script>
-    $(document).ready(function() {
-        
-        $('.add-to-cart-button').click(function() {
+  $(document).ready(function() {
+    $('.add-to-cart-button').click(function() {
+        var itemId = $(this).data('item-id');
+        var csrfToken = '{{ csrf_token }}';
 
+        var data = {
+            id: itemId,
+            'csrfmiddlewaretoken': csrfToken
+        };
 
-            var itemId = $(this).data('item-id');
-            // var quantity = parseInt($('#quantity').val());
-            var data = {
-                id: itemId,
-                // qty: quantity,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            };
-            
-            $.ajax({
-                type: 'POST',
-                url: '{% url 'add_to_cart' %}',
-                data: data,
-                success: function(response) {
-
-                    // Update the total quantity in the cart display
-                    var totalQuantity = response.cart_items_count
-
-                    // $('#total-quantity').text(totalQuantity);
-					// Display the badge and animate it
-					$('.cart-badge').text(totalQuantity).show().animate({
-							fontSize: '16px',
-						}, 200).animate({
-							fontSize: '12px',
-						}, 200);
-
-                },
-                error: function(xhr) {
-                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
-                }
-            });
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'add_to_cart' %}',
+            data: data,
+            success: function(response) {
+                var totalQuantity = response.cart_items_count;
+                $('.cart-badge').text(totalQuantity).show().animate({
+                    fontSize: '16px',
+                }, 200).animate({
+                    fontSize: '12px',
+                }, 200);
+            },
+            error: function(xhr) {
+                alert('Error: ' + xhr.status + ' ' + xhr.responseText);
+            }
         });
     });
+});
 </script>
 
 
