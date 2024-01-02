@@ -33,7 +33,7 @@
 
 .navbar-default a{
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
    
 }
 
@@ -48,7 +48,8 @@
     
 }
 .logo img{
-    margin-left: -10px !important;
+    margin-left: 10px !important;
+    margin-right: 20px;
 }
 #cart{
     font-size: 26px;
@@ -193,7 +194,7 @@ padding: 10px !important;
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
+                        <li><a href="{% url 'cart' %} " class="page-scroll no-underline">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
