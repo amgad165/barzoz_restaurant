@@ -44,10 +44,15 @@ def main_menu(request):
 
  
 def add_to_cart(request):
+    
     if request.method == 'POST':
+        
         menu_item_id = request.POST.get('id')
-        menu_item = get_object_or_404(Menu_Item, pk=menu_item_id)
+        
 
+        menu_item = get_object_or_404(Menu_Item, pk=menu_item_id)
+        
+        # Use session key to identify the cart for the user
         session_key = request.session.session_key
         if not session_key:
             request.session.cycle_key()
@@ -61,6 +66,7 @@ def add_to_cart(request):
 
         order_item.save()
 
+        # Check if an order exists for the user's session
         order_qs = Order.objects.filter(session_key=session_key, ordered=False)
 
         if order_qs.exists():
@@ -68,11 +74,13 @@ def add_to_cart(request):
             if not order.items.filter(menu_item__id=order_item.menu_item.id, ordered=False).exists():
                 order.items.add(order_item)
         else:
+            # Create a new order for the user's session
             ordered_date = timezone.now()
             order = Order.objects.create(session_key=session_key, ordered_date=ordered_date)
             order.items.add(order_item)
 
         cart_items = order.items.all()
+        
         total_quantity = sum(item.quantity for item in cart_items)
 
         return JsonResponse({'success': 'Item added to cart', 'cart_items_count': total_quantity})
@@ -102,7 +110,6 @@ def cart(request):
         return render(request, "cart.html", {'order_items': order_items})
 
 
-@csrf_exempt
 def update_cart(request):
     if request.method == "POST":
         # Process the data sent by the "Update Cart" button

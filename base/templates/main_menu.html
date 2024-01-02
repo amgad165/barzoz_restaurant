@@ -317,29 +317,35 @@ padding: 20px 0;
 
 <script>
     $(document).ready(function() {
-        $('#add-to-cart-form').submit(function(e) {
-            e.preventDefault();
-            var form = $(this);
-            var itemId = form.find('input[name="id"]').val();
-            var csrfToken = form.find('input[name="csrfmiddlewaretoken"]').val();
+        
+        $('.add-to-cart-button').click(function() {
 
+
+            var itemId = $(this).data('item-id');
+            // var quantity = parseInt($('#quantity').val());
             var data = {
                 id: itemId,
-                csrfmiddlewaretoken: csrfToken
+                // qty: quantity,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
             };
-
+            
             $.ajax({
                 type: 'POST',
-                url: form.attr('action'),
+                url: '{% url 'add_to_cart' %}',
                 data: data,
-                dataType: 'json',
                 success: function(response) {
-                    var totalQuantity = response.cart_items_count;
-                    $('.cart-badge').text(totalQuantity).show().animate({
-                        fontSize: '16px',
-                    }, 200).animate({
-                        fontSize: '12px',
-                    }, 200);
+
+                    // Update the total quantity in the cart display
+                    var totalQuantity = response.cart_items_count
+
+                    // $('#total-quantity').text(totalQuantity);
+					// Display the badge and animate it
+					$('.cart-badge').text(totalQuantity).show().animate({
+							fontSize: '16px',
+						}, 200).animate({
+							fontSize: '12px',
+						}, 200);
+
                 },
                 error: function(xhr) {
                     alert('Error: ' + xhr.status + ' ' + xhr.responseText);
@@ -348,6 +354,7 @@ padding: 20px 0;
         });
     });
 </script>
+
 
 
 
