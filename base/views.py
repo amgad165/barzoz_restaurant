@@ -278,7 +278,14 @@ def success(request):
                 order_items.update(ordered=True)
                 for item in order_items:
                     item.save()
-                    
+
+
+                items_lists = ', '.join(items_lists)
+                message= 'your order :  '+items_lists+ '   will be ready soon'
+                email_from = settings.EMAIL_HOST_USER
+                client_email = [order.user_details.email]
+
+                send_mail('Order', message, from_email=email_from ,recipient_list=client_email, fail_silently=False)
                 order.ordered = True
                 order.save()
 
@@ -377,17 +384,16 @@ def confirm_order(request):
         for item in order_items:
             item.save()
             items_lists.append(str(item))
-
-        order.ordered = True
-        order.save()
-
+        
         items_lists = ', '.join(items_lists)
-        message= 'your order :  '+items_lists+ ' will be ready soon'
+        message= 'your order :  '+items_lists+ '   will be ready soon'
         email_from = settings.EMAIL_HOST_USER
         client_email = [order.user_details.email]
 
         send_mail('Order', message, from_email=email_from ,recipient_list=client_email, fail_silently=False)
 
+        order.ordered = True
+        order.save()
 
         return render(request,"success.html")  
 

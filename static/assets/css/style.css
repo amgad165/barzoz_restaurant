@@ -463,7 +463,15 @@ fieldset[disabled] .btn-primary.active {
     width: 100%;
   }
 
+/* Styling to prevent the underline effect on links with the class 'no-underline' */
+.navbar-default .nav li a.no-underline::before {
+    width: 0% !important; /* Setting width to 0% and using !important to override previous styling */
+}
 
+/* Styling for the underline effect on hover, excluding links with the class 'no-underline' */
+.navbar-default .nav li a:not(.no-underline):hover::before {
+    width: 100%;
+}
 
 .theme-accent-color-bg {
     background-color: #F22613;
@@ -821,7 +829,7 @@ section h3.section-subheading {
 
     clear: both;
     display: block;
-
+    text-align: justify;
 }
 
 .cl-effect-3 a {
@@ -2137,13 +2145,12 @@ a#back-to-top.show {
 
 
 }
-.logo img{
-    width: 80px;
-    height: 90px;
-    margin-left: -20px;
-    margin-top: -15px;
+.logo img {
+    width: 58px;
+    height: 65px;
+    /* margin-left: -13px; */
+    margin-top: 7px;
     margin-right: 50px;
-
 }
 
 .heading-font h1{
@@ -2164,6 +2171,30 @@ header .intro-text .intro-heading p{
     font-family: futuremedium;
     letter-spacing: 6px;
     color: #c6a880;
+}
+
+.subtotal .totalRow.final {
+    font-size: 21px !important;
+    font-family: futurebook;
+}
+.totalRow .label{
+    font-family: futurebook !important;
+   
+}
+.totalRow .btn , .heading .submit-button ,.continue{
+    font-family: futurebook !important;
+    font-size: 1em !important;
+
+}
+
+/* Styling to prevent the underline effect on links with the class 'no-underline' */
+.navbar-default .nav li a::before {
+    width: 0% !important; /* Setting width to 0% and using !important to override previous styling */
+}
+
+/* Styling for the underline effect on hover, excluding links with the class 'no-underline' */
+.navbar-default .nav li a:hover::before {
+    width: 100%;
 }
 
 }
@@ -2375,11 +2406,15 @@ width: 67px;
         letter-spacing: 8px;
     }
 
-  .logo img{
-    width: 40px;
-    height: 47px;
-    margin-left: 15px;
-  }  
+    .logo img {
+        width: 37px;
+        height: 40px;
+        margin-left: 15px;
+        margin-top: 5px;
+    }
+    .navbar-toggle{
+        margin-bottom: 0px;
+    }
 
 
 .navbar-brand{
@@ -2439,6 +2474,23 @@ margin-top: 10px;
 }
 
 
+/* cart page */
+.subtotal .totalRow.final {
+    font-size: 18px;
+    
+}
+.totalRow .btn , .heading .submit-button ,.continue{
+    font-family: futurebook !important;
+    font-size: 0.9em !important;
+
+
+}
+.totalRow .label{
+    font-family: futurebook !important;
+    font-size: 0.9em !important;
+}
+
+
 .custom-button {
 font-size: 12px;
 }
@@ -2454,6 +2506,8 @@ footer p {
     line-height: 6px;
 
 }
+
+
 }
 
 .custom-button{
@@ -2484,10 +2538,9 @@ footer p {
 
 
     .logo img {
-        width: 80px;
-        height: 90px;
-        margin-right: 10px;
-        margin-left: 7px;
+        width: 40px;
+        height: 50px;
+        margin-top: 15px;
     }
 
     .navbar-default .navbar-brand {
@@ -2545,6 +2598,11 @@ footer p {
             font-size: 36px;
     
             
+        }
+        .logo img {
+            width: 48px;
+            height: 55px;
+            margin-top: 15px;
         }
     
         .navbar-default .nav li a {

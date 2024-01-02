@@ -62,6 +62,7 @@
 .removeWrap a.remove{
     margin-left: 15px;
     margin-top: 15px;
+    font-size: 13px;
 }
 }
 body{
@@ -111,8 +112,11 @@ color: whitesmoke !important;
 .infoWrap .row {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
 }
-
+.cart .items .cartSection{
+    display: flex;
+}
 
 .custom-col {
     flex: 1; /* Each column takes equal width */
@@ -201,7 +205,7 @@ min-height: 40px;
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li><a href="{% url 'cart' %} " class="page-scroll">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
+                        <li><a  href="{% url 'cart' %} " class="page-scroll no-underline">W A R E N K O R B   <i id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
