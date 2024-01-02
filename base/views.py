@@ -41,7 +41,6 @@ def main_menu(request):
     
     return render(request, "main_menu.html", context)
 
-@csrf_protect
 def add_to_cart(request):
     
     if request.method == 'POST':
