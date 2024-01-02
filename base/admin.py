@@ -16,25 +16,6 @@ admin.site.register(Coupon, CouponAdmin)
 # admin.site.register(User_details)
 
 
-
-from django.contrib import admin
-from . models import *
-# Register your models here.
-admin.site.register(Menu_Item)
-
-admin.site.register(Category)
-
-class CouponAdmin(admin.ModelAdmin):
-    list_display = ('code', 'percent_off', 'duration')
-    # Exclude the stripe_coupon_id field from the admin page
-    exclude = ('stripe_coupon_id',)
-
-admin.site.register(Coupon, CouponAdmin)
-
-
-# admin.site.register(User_details)
-
-
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_summary', 'get_user_name', 'get_user_telefon', 'get_user_email',
                     'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date', 'being_delivered',
