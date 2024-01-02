@@ -2187,15 +2187,7 @@ header .intro-text .intro-heading p{
 
 }
 
-/* Styling to prevent the underline effect on links with the class 'no-underline' */
-.navbar-default .nav li a::before {
-    width: 0% !important; /* Setting width to 0% and using !important to override previous styling */
-}
 
-/* Styling for the underline effect on hover, excluding links with the class 'no-underline' */
-.navbar-default .nav li a:hover::before {
-    width: 100%;
-}
 
 }
 
@@ -2494,6 +2486,19 @@ margin-top: 10px;
 .custom-button {
 font-size: 12px;
 }
+
+
+/* Styling to prevent the underline effect on links 
+.navbar-default .nav li a::before {
+    width: 0% !important; /* Setting width to 0% and using !important to override previous styling */
+}
+
+/* Styling for the underline effect on hover, excluding links 
+.navbar-default .nav li a:hover::before {
+    width: 100%;
+}
+
+
 footer h1{
     font-size: 20px !important;
     letter-spacing: 6px !important;
@@ -2506,6 +2511,7 @@ footer p {
     line-height: 6px;
 
 }
+
 
 
 }
