@@ -42,7 +42,7 @@ def main_menu(request):
     return render(request, "main_menu.html", context)
 
 
-@csrf_exempt  # Add this decorator to bypass CSRF for this view
+ 
 def add_to_cart(request):
     if request.method == 'POST':
         menu_item_id = request.POST.get('id')
@@ -79,6 +79,7 @@ def add_to_cart(request):
 
     return JsonResponse({'error': 'Invalid request'})
 
+
 def cart(request):
     session_key = request.session.session_key  # Get the currently logged-in session user
     try:
@@ -101,6 +102,7 @@ def cart(request):
         return render(request, "cart.html", {'order_items': order_items})
 
 
+@csrf_exempt
 def update_cart(request):
     if request.method == "POST":
         # Process the data sent by the "Update Cart" button

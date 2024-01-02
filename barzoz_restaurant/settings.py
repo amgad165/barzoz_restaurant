@@ -119,7 +119,7 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
-    '*',
+    "https://bazroz.com", "bazroz.com"
 ]
 
 
