@@ -222,9 +222,6 @@ img::-moz-selection {
     background: 0 0
 }
 
-body {
-    webkit-tap-highlight-color: #333
-}
 
 .img-responsive,
 .thumbnail>img,
@@ -525,7 +522,7 @@ fieldset[disabled] .btn-primary.active {
     color: #fff;
 
     padding: 25px 0px;
-    margin-right: 30px;
+    margin-right: 60px;
     -webkit-transition: all .5s ease-in-out;
     -moz-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
@@ -566,7 +563,7 @@ fieldset[disabled] .btn-primary.active {
     transition: all .5s ease-in-out;
 }
 .navbar-nav{
-margin-right: 140px !important;
+margin-right: 80px !important;
 }
 
 
@@ -699,7 +696,7 @@ margin-right: 140px !important;
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     left: 0;
     z-index: 1;
@@ -1081,9 +1078,7 @@ footer.white-wrapper .social-links li a {
 /*-----------------------------------------------------------------------------------*/
 /*  12 - CAROUSEL STYLES
 /*-----------------------------------------------------------------------------------*/
-.fw-carousel .owl-item {
-    /* padding: 0 */
-}
+
 
 .fw-carousel .hover-item-caption h3 {
     font-size: 20px
@@ -1536,6 +1531,10 @@ footer.white-wrapper .social-links li a {
         padding-left: 50px;
         padding-right: 50px;
     }
+    .navbar-fixed-top .home {
+        padding-left: 32px;
+    }
+
 }
 
 @media screen and (max-width: 991px) {
@@ -1627,7 +1626,7 @@ footer.white-wrapper .social-links li a {
         margin-bottom: 0;
     }
     .navbar-default .navbar-brand {
-        font-size: 46px;
+        font-size: 36px;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s;
@@ -1641,6 +1640,15 @@ footer.white-wrapper .social-links li a {
         -o-transition: all .5s ease-in-out;
         -ms-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out
+    }
+
+    .main_menu_link{
+        border-color: #c6a880;
+        color: #fff;
+        background-color: #c6a880;
+        padding-right: 20px !important;
+        padding-left: 20px !important;
+
     }
 }
 
@@ -1695,6 +1703,11 @@ footer.white-wrapper .social-links li a {
      .navbar-default .navbar-toggle .icon-bar {
         background-color: #222;
      }
+
+     .main_menu_link{
+text-align: left;
+
+    }
      .pad-sides-60 {
         padding-left: 10px !important;
         padding-right: 10px !important;
@@ -2128,7 +2141,7 @@ a#back-to-top.show {
     border-left: 1.5px solid #c6a880;
     position: absolute;
     top: 0;
-    left: 150px; 
+    left: 121px; 
     transform: translateX(-50%);
 }
 
@@ -2136,7 +2149,7 @@ a#back-to-top.show {
     border-left: 1.5px solid #c6a880;
     position: absolute;
     top: 0;
-    right: 150px;
+    right: 121px;
     transform: translateX(-50%);
 }
 
@@ -2146,8 +2159,8 @@ a#back-to-top.show {
 
 }
 .logo img {
-    width: 58px;
-    height: 65px;
+    width: 48px;
+    height: 55px;
     /* margin-left: -13px; */
     margin-top: 7px;
     margin-right: 50px;
@@ -2156,7 +2169,7 @@ a#back-to-top.show {
 .heading-font h1{
     font-family: futurebold !important;
     letter-spacing: 24px;
-    font-size: 100px;
+    font-size: 70px;
     color: #c6a880 ;  
 }
  .navbar-default .navbar-brand, .navbar-default .nav li a {
@@ -2561,7 +2574,7 @@ footer p {
     }
 
     .heading-font h1 {
-        font-size: 70px;
+        font-size: 50px;
 
     }
 
@@ -2601,7 +2614,7 @@ footer p {
     
 
         .navbar-default .navbar-brand {
-            font-size: 36px;
+            font-size: 32px;
     
             
         }
@@ -2614,7 +2627,7 @@ footer p {
         .navbar-default .nav li a {
             font-size: 11px;
             padding: 30px 0px;
-            margin-right: 20px;
+            margin-right: 30px;
     
         }
         
@@ -2624,7 +2637,16 @@ footer p {
             font-size: 14px;
 
         }
-
+        #the-menu .container{
+            width: 910px ;
+        }
+        #contact .container{
+            width: 910px ;
+        }
+        #contact iframe {
+    
+            height: 400px;
+        }
         #about .container{
 
             width: 906px ;
@@ -2664,6 +2686,24 @@ footer p {
             .navbar-default .nav li a {
                 font-size: 15px;
                 padding: 30px 0px;
-                margin-right: 20px;
+                margin-right: 30px;
             }
             }
+
+    .about_image_container {
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+            }
+    .image_overlay::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Adjust the last value for the opacity (0.0 to 1.0) */
+        z-index: 1;
+
+    }

@@ -11,18 +11,27 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    
+
 class Menu_Item(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    image = models.FileField(upload_to='menu_images')
+    image = models.FileField(upload_to='menu_images/')
 
     def __str__(self):
         return self.name
 
-       
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # saving image first
+        img = Image.open(self.image.path)
+        if img.height > 866 or img.width > 1154:
+            new_img = (1080, 1080)
+            img.thumbnail(new_img)
+            img.save(self.image.path)
+
+
+            
 class OrderItem(models.Model):
     session_key = models.CharField(max_length=32)
     menu_item = models.ForeignKey(Menu_Item, on_delete=models.CASCADE)
@@ -42,6 +51,7 @@ class Order(models.Model):
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(null=True)
+    payment_type = models.CharField(max_length=10, choices=[("cash", "Cash"), ("cart", "Cart")],default = "cash")
     stripe_session_id = models.CharField(max_length=255, blank=True, null=True)
     coupon = models.ForeignKey(
     'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
@@ -76,18 +86,7 @@ class Order(models.Model):
         return quantity
     
     
-class User_details(models.Model):
-    vorname = models.CharField(max_length=255)
-    nachname = models.CharField(max_length=255)
-    bezirk = models.CharField(max_length=255)
-    street_address = models.CharField(max_length=255)
-    hausnummer = models.CharField(max_length=255)
-    plz_zip = models.CharField(max_length=255)
-    telefon = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    um_hinweise = models.CharField(max_length=500,null=True, blank= True)
-    def __str__(self):
-        return self.vorname + " " + self.nachname
+
 
 class Coupon(models.Model):
     code = models.CharField(max_length=15, unique=True)
@@ -126,7 +125,18 @@ class Coupon(models.Model):
 
 
 
-
+class User_details(models.Model):
+    vorname = models.CharField(max_length=255)
+    nachname = models.CharField(max_length=255)
+    bezirk = models.CharField(max_length=255)
+    street_address = models.CharField(max_length=255)
+    hausnummer = models.CharField(max_length=255)
+    plz_zip = models.CharField(max_length=255)
+    telefon = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    um_hinweise = models.CharField(max_length=500,null=True, blank= True)
+    def __str__(self):
+        return self.vorname + " " + self.nachname
 
 
 

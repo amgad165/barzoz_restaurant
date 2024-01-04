@@ -15,7 +15,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from . utilities import mail
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -29,7 +29,6 @@ def home(request):
     context = {'menu_items_by_category': menu_items_by_category}
     return render(request,"index.html", context)
 
-
 def main_menu(request):
     categories = Category.objects.all()
     menu_items_by_category = {}
@@ -42,12 +41,16 @@ def main_menu(request):
     return render(request, "main_menu.html", context)
 
 
- 
 def add_to_cart(request):
+    
     if request.method == 'POST':
+        
         menu_item_id = request.POST.get('id')
-        menu_item = get_object_or_404(Menu_Item, pk=menu_item_id)
+        
 
+        menu_item = get_object_or_404(Menu_Item, pk=menu_item_id)
+        
+        # Use session key to identify the cart for the user
         session_key = request.session.session_key
         if not session_key:
             request.session.cycle_key()
@@ -59,8 +62,11 @@ def add_to_cart(request):
             ordered=False
         )
 
+
+
         order_item.save()
 
+        # Check if an order exists for the user's session
         order_qs = Order.objects.filter(session_key=session_key, ordered=False)
 
         if order_qs.exists():
@@ -68,11 +74,13 @@ def add_to_cart(request):
             if not order.items.filter(menu_item__id=order_item.menu_item.id, ordered=False).exists():
                 order.items.add(order_item)
         else:
+            # Create a new order for the user's session
             ordered_date = timezone.now()
             order = Order.objects.create(session_key=session_key, ordered_date=ordered_date)
             order.items.add(order_item)
 
         cart_items = order.items.all()
+        
         total_quantity = sum(item.quantity for item in cart_items)
 
         return JsonResponse({'success': 'Item added to cart', 'cart_items_count': total_quantity})
@@ -91,16 +99,18 @@ def cart(request):
         total_price = order.get_total()
 
 
+        if order.coupon:
+            discount= order.coupon.percent_off
+        else:
+            discount = None
 
 
-
-        return render(request, "cart.html", {'order_items': order_items,'total_price':total_price,"cart_count":cart_count})
+        return render(request, "cart.html", {'order_items': order_items,'total_price':total_price,"cart_count":cart_count,"discount":discount})
 
     except Order.DoesNotExist:
         # Handle the case where the order doesn't exist
         order_items = None    
         return render(request, "cart.html", {'order_items': order_items})
-
 
 
 def update_cart(request):
@@ -276,18 +286,23 @@ def success(request):
                                 
                 order_items = order.items.all()
                 order_items.update(ordered=True)
+                items_lists = []
+                index = 1
                 for item in order_items:
                     item.save()
+                    items_lists.append(str(index) +str(item))
+                    index +=1
 
 
-                items_lists = ', '.join(items_lists)
-                message= 'your order :  '+items_lists+ '   will be ready soon'
-                email_from = settings.EMAIL_HOST_USER
-                client_email = [order.user_details.email]
-
-                send_mail('Order', message, from_email=email_from ,recipient_list=client_email, fail_silently=False)
                 order.ordered = True
                 order.save()
+
+                items_lists = '\n '.join(items_lists)
+
+                # send email to the client mail
+                email_from = settings.EMAIL_HOST_USER
+                mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cart')
+
 
                 return render(request, "success.html")
     
@@ -363,11 +378,11 @@ def add_coupon(request):
             order.coupon = get_coupon(request, code)
             order.save()
             messages.success(request, "Successfully added coupon")
-            return redirect("checkout")
+            return redirect("cart")
         except :
             messages.info(request, "You do not have an active order")
 
-    return redirect("checkout")
+    return redirect("cart")
 
 
 
@@ -381,18 +396,22 @@ def confirm_order(request):
         
         order_items.update(ordered=True)
         items_lists = []
+        index = 1
         for item in order_items:
             item.save()
-            items_lists.append(str(item))
-        
-        items_lists = ', '.join(items_lists)
-        message= 'your order :  '+items_lists+ '   will be ready soon'
-        email_from = settings.EMAIL_HOST_USER
-        client_email = [order.user_details.email]
+            items_lists.append(str(index) +str(item))
+            index +=1
 
-        send_mail('Order', message, from_email=email_from ,recipient_list=client_email, fail_silently=False)
+        items_lists = '\n '.join(items_lists)
+
+        # send email to the client mail
+        email_from = settings.EMAIL_HOST_USER
+        mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cash')
+
+
 
         order.ordered = True
+
         order.save()
 
         return render(request,"success.html")  
