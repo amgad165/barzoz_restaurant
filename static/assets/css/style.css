@@ -223,6 +223,7 @@ img::-moz-selection {
 }
 
 
+
 .img-responsive,
 .thumbnail>img,
 .thumbnail a>img,
@@ -1078,7 +1079,6 @@ footer.white-wrapper .social-links li a {
 /*-----------------------------------------------------------------------------------*/
 /*  12 - CAROUSEL STYLES
 /*-----------------------------------------------------------------------------------*/
-
 
 .fw-carousel .hover-item-caption h3 {
     font-size: 20px
@@ -2230,10 +2230,8 @@ h3.section-subheading{
     height: 425px;
 }
 @media(max-width: 767px) {
-.about_image{
-    width: 215px;
-    height: 321px;
-}
+
+
 
 .section-heading img{
     width: 45px;
@@ -2500,10 +2498,15 @@ margin-top: 10px;
 font-size: 12px;
 }
 
+.about_image{
+    width: 100%;
+    height: 321px;
+}
+.about_image_container{
+    display: inline-block;
+    float: none;
+}
 
-/* Styling to prevent the underline effect on links 
-.navbar-default .nav li a::before {
-    width: 0% !important; /* Setting width to 0% and using !important to override previous styling */
 }
 
 /* Styling for the underline effect on hover, excluding links 
@@ -2597,6 +2600,16 @@ footer p {
     .components-right-adjust  .nav li a{
 
         font-size: 15px;
+    }
+
+
+    .about_image{
+        width: 100%;
+        height: 321px;
+    }
+    .about_image_container{
+        display: inline-block;
+        float: none;
     }
 
 
