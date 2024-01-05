@@ -290,7 +290,7 @@ def success(request):
                 index = 1
                 for item in order_items:
                     item.save()
-                    items_lists.append(str(index) +str(item))
+                    items_lists.append(str(index)+'- ' +str(item))
                     index +=1
 
 
@@ -399,7 +399,7 @@ def confirm_order(request):
         index = 1
         for item in order_items:
             item.save()
-            items_lists.append(str(index) +str(item))
+            items_lists.append(str(index)+'- ' +str(item))
             index +=1
 
         items_lists = '\n '.join(items_lists)
