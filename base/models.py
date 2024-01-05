@@ -22,13 +22,6 @@ class Menu_Item(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # saving image first
-        img = Image.open(self.image.path)
-        if img.height > 866 or img.width > 1154:
-            new_img = (1080, 1080)
-            img.thumbnail(new_img)
-            img.save(self.image.path)
 
 
             
