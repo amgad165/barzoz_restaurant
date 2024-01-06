@@ -5,9 +5,9 @@ def mail(order,sender, items_lists,payment_type):
     message = f"Sehr geehrte/r {order.user_details.vorname}   {order.user_details.nachname} ,\n \
 vielen Dank für Ihre Bestellung bei Bazroz! Wir freuen uns sehr, dass Sie sich für unsere Küche entschieden haben und möchten Ihnen die Bestellung bestätigen.\n\n \
 Bestellübersicht: \n \
-Bestellnummer: {order.id} \n \
+Bestellnummer: {order.id} \n\n \
 Bestellte Gerichte: \n \
-{items_lists} \n \
+ {items_lists} \n \
 Weitere Informationen: {order.user_details.um_hinweise} \n \
 Zahlungsart: {payment_type} \n \
 Gesamtbetrag: {order.get_total()}€ \n\n \
