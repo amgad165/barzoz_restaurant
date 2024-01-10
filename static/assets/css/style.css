@@ -824,7 +824,7 @@ section h2.section-heading, .section-heading {
 }
 
 section h3.section-subheading {
-    text-transform: capitalize;
+
 
     clear: both;
     display: block;
@@ -2465,7 +2465,7 @@ background-color: #c6a880 !important;
 
 #contact .section-heading{
     font-size: 20px; 
-    font-family: futuremedium;
+    font-family: futurebold;
 }
 
 

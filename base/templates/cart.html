@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
     <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
 
-    <title>BARZOZ</title>
+    <title>BAZROZ</title>
 
    
 {% include "includes/links.html" %}
@@ -112,7 +112,7 @@ color: whitesmoke !important;
 .infoWrap .row {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+   
 }
 .cart .items .cartSection{
     display: flex;
@@ -344,7 +344,7 @@ font-size: 14px !important;
 					<h3>{{ order_item.menu_item.name }}</h3>
                 </div>
                 <div class="custom-col">
-					 <p style="white-space: nowrap;"> <input style="width: 30%; color: #000; font-weight: 700;" name="quantity" type="number" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price }}</span></p>
+					 <p style="white-space: nowrap;"> <input style="width: 30%; color: #000; font-weight: 700;" name="quantity" type="number" min="0" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price }}</span></p>
 					 <input type="hidden" name="product_id" value="{{ order_item.menu_item.id }}">
                     </div>
 					
@@ -355,7 +355,7 @@ font-size: 14px !important;
 					<p><span class="small-currency">€</span>{{ order_item.get_total_item_price }}</p>
 				  </div>
 				 
-				<div  class="cartSection removeWrap custom-col">
+				<div style="display: block;"  class="cartSection removeWrap custom-col">
 					 <a href="#" class="remove" data-product-id="{{ order_item.menu_item.id }}">x</a>
 				  </div>
 				</div>
