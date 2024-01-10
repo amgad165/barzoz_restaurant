@@ -818,13 +818,12 @@ section, section.white-bg {
 section h2.section-heading, .section-heading {
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 42px;
+    font-size: 38px;
     letter-spacing: 10px;
     font-weight: 700;
 }
 
 section h3.section-subheading {
-
 
     clear: both;
     display: block;
@@ -1741,6 +1740,8 @@ text-align: left;
     .post-right-col {
         padding-top: 30px;
     }
+
+
 }
 
 @media(max-width:460px) {
@@ -2202,7 +2203,12 @@ header .intro-text .intro-heading p{
 
 }
 
-
+.contact-row{
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    margin-left: 0px;
+}
 
 }
 
@@ -2214,7 +2220,7 @@ section.tangaroa-back{
 }
 .section-heading{
     color: #c6a880;
-    font-family: futurebook;
+    font-family: futurebold;
     font-size: 50px;
     
 }
@@ -2305,9 +2311,17 @@ h3.section-subheading{
 #contact p {
     color: #c6a880;
     font-family: futuremedium;  
-    letter-spacing: 4px;
-    font-size: 15px;
-    margin-bottom: 40px;
+    letter-spacing: 3px;
+    font-size: 16px;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+.contact_icon p{
+
+    letter-spacing: 3px !important;
+    font-size: 12px !important;
+    margin-bottom: 0px !important;
+
 }
 #contact h2 {
     letter-spacing: 12px;
@@ -2338,7 +2352,7 @@ font-weight: normal;
 }
 .contact_icon i{
     font-size: 28px;
-    margin-right: 0px;
+    margin-right: 11px;
 
 }
 
@@ -2452,7 +2466,7 @@ background-color: #c6a880 !important;
 .section-subheading{
     font-size: 15px !important;
     letter-spacing: 3px !important;
-    
+    text-align: center !important;
 }
 #about .section-heading{
     font-size: 26px !important;
@@ -2465,7 +2479,7 @@ background-color: #c6a880 !important;
 
 #contact .section-heading{
     font-size: 20px; 
-    font-family: futurebold;
+    font-family: futuremedium;
 }
 
 
@@ -2510,7 +2524,16 @@ font-size: 12px;
     float: none;
 }
 
+
+.contact-date{
+text-align: center !important;
 }
+
+}
+
+
+
+
 
 /* Styling for the underline effect on hover, excluding links 
 .navbar-default .nav li a:hover::before {
@@ -2651,7 +2674,7 @@ footer p {
     
         .navbar-default .nav li a {
             font-size: 10px;
-            padding: 15px 0px;
+            padding: 10px 0px;
             margin-right: 40px;
     
         }
