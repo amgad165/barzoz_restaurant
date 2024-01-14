@@ -4,8 +4,9 @@ from django.conf import settings
 
 def mail(order,sender, items_lists,payment_type):
     
-    image_url = f"{settings.STATIC_URL}/assets/img/Bazroz_Logo_schrift.png"
-
+    s3_base_url = settings.STATICFILES_STORAGE  # Use your specific setting for S3 base URL
+    image_path = "assets/img/Bazroz_Logo_schrift.png"
+    image_url = f"{s3_base_url}/{image_path}"
 
     message = format_html(
         f"Sehr geehrte/r {order.user_details.vorname} {order.user_details.nachname},<br><br>"

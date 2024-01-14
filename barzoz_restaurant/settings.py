@@ -27,7 +27,7 @@ SECRET_KEY = config('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['51.21.145.40','127.0.0.1','bazroz.com']
+ALLOWED_HOSTS = ['51.21.145.40','127.0.0.1','bazroz.com','www.bazroz.com']
 
 
 # Application definition
@@ -119,7 +119,7 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://bazroz.com",
+    "https://bazroz.com","https://www.bazroz.com"
 ]
 CSRF_TRUSTED_ORIGINS = ['https://*.bazroz.com']
 
