@@ -1633,6 +1633,14 @@ footer.white-wrapper .social-links li a {
         transition: all .3s;
         font-weight: 600;
     }
+
+    .navbar-default .navbar-brand img{
+        width: 81%;
+        height: 29px;
+        margin-left: 70px;
+        margin-top: -11px;
+    }
+
     .navbar-default.navbar-shrink {
         padding: 0;
         background-color: #222;
@@ -2209,7 +2217,14 @@ header .intro-text .intro-heading p{
     align-items: center; 
     margin-left: 0px;
 }
+.contact-div{
+    margin-top: 10px;
+}
 
+.footer-img img {
+
+height: 86px;
+}
 }
 
 section.green-back{
@@ -2295,8 +2310,8 @@ h3.section-subheading{
     color: #c6a880;
     font-family: futuremedium;  
     letter-spacing: 4px;
-    font-size: 12px;
-    margin-bottom: 60px;
+    font-size: 16px;
+    margin-bottom: 32px;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -2319,7 +2334,7 @@ h3.section-subheading{
 .contact_icon p{
 
     letter-spacing: 3px !important;
-    font-size: 12px !important;
+    font-size: 16px !important;
     margin-bottom: 0px !important;
 
 }
@@ -2333,6 +2348,21 @@ h3.section-subheading{
 }
 
 /* mobile version contact */
+
+@media(max-width: 991px){
+    .contact_icon {
+        font-size: 15px;
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+        font-family: futurebook;
+        font-weight: 600;
+        display: grid;
+    
+    }
+    .contact-date {
+        text-align: center !important;
+    }
+}
 @media(max-width: 767px) {
 
 #contact p {
@@ -2346,7 +2376,7 @@ h3.section-subheading{
     margin-bottom: 20px;
     letter-spacing: 3px;
     font-family: futurebook;
-font-weight: normal;
+    font-weight: 600;
     display: grid;
 
 }
@@ -2440,6 +2470,17 @@ width: 67px;
 .navbar-brand{
     padding: 15px 5px 5px 5px !important;
 }
+.navbar-default .navbar-brand img{
+    width: 70%;
+    height: 15px;
+    margin-left: 15px;
+    margin-top: -8px;
+}
+
+ .navbar-toggle {
+    margin-top: 8px ;
+}
+
 .navbar-default{
 background-color: transparent;
 border-color: #c6a880;
@@ -2478,7 +2519,7 @@ background-color: #c6a880 !important;
 }
 
 #contact .section-heading{
-    font-size: 20px; 
+    font-size: 26px !important; 
     font-family: futuremedium;
 }
 
@@ -2527,6 +2568,10 @@ font-size: 12px;
 
 .contact-date{
 text-align: center !important;
+}
+
+.footer-img img {
+    height: 65px;
 }
 
 }
@@ -2597,11 +2642,18 @@ footer p {
         
     }
 
+    .navbar-default .navbar-brand img{
+        width: 70%;
+        height: 20px;
+        margin-left: 0px;
+        margin-top: -15px;
+    }
+
  
     .navbar-default .nav li a {
 
         font-size: 10px;
-        padding: 15px 0px;
+        padding: 10px 0px;
         margin-right: 40px;
 
         letter-spacing: 2px;
@@ -2639,7 +2691,9 @@ footer p {
         height: 321px;
     }
 
-
+    .footer-img img {
+        height: 80px;
+    }
 
     }
 
@@ -2665,6 +2719,13 @@ footer p {
             font-size: 24px;
     
             
+        }
+
+        .navbar-default .navbar-brand img{
+            width: 62%;
+            height: 25px;
+            margin-left: 70px;
+            margin-top: -15px;
         }
         .logo img {
             width: 42px;
@@ -2746,7 +2807,7 @@ footer p {
         
             .navbar-default .nav li a {
                 font-size: 13px;
-                padding: 15px 0px;
+              
                 margin-right: 40px;
             }
             }

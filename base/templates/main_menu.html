@@ -11,10 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/img/ico/apple-touch-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'assets/img/ico/apple-touch-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
+ <link rel="shortcut icon" href="{% static 'assets/img/ico/favicon.png' %}">
 
     <title>BAZROZ</title>
 
@@ -48,9 +45,14 @@
 
     line-height: normal !important;
     margin-top: 10px !important;
-    margin-left: 5px !important;
+    margin-left: 0px !important;
     
 }
+.navbar-brand img{
+    margin-left: 60px !important;
+
+}
+
 .logo img{
     margin-left: 10px !important;
     margin-right: 20px;
@@ -191,9 +193,9 @@ padding: 20px 0;
                 <div class="navbar-header page-scroll ">
 
                     <a class="navbar-toggle  visible-xs" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
-                    <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
+                    {% comment %} <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a> {% endcomment %}
                     
-                   <a class="navbar-brand smoothie visible-md visible-lg" href="{% url 'home' %}">BAZROZ</span></a>
+                   <a class="navbar-brand smoothie " href="{% url 'home'  %}"><img  src="{% static 'assets/img/nur_name_Bazroz.png' %}"> </span></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->

@@ -10,13 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="assets/img/ico/favicon.ico">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/img/ico/apple-touch-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'assets/img/ico/apple-touch-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'assets/img/ico/apple-touch-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'assets/img/ico/apple-touch-icon-57x57.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/img/ico/favicon.png' %}">
 
-    <title>BAZROZ</title>
+
+    <title>BARZOZ</title>
 
 {% include "includes/links.html" %}
 
@@ -94,9 +91,9 @@ p{
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>
+                    {% comment %} <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a> {% endcomment %}
                     
-                   <a class="navbar-brand smoothie visible-md visible-lg" href="{% url 'home' %}">BAZROZ</span></a>
+                   <a class="navbar-brand smoothie " href="{% url 'home'  %}"><img  src="{% static 'assets/img/nur_name_Bazroz.png' %}"> </span></a>
                 </div>
 
 
