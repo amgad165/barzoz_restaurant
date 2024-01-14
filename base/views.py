@@ -297,7 +297,7 @@ def success(request):
                 order.ordered = True
                 order.save()
 
-                items_lists = '\n '.join(items_lists)
+                items_lists = '<br> '.join(items_lists)
 
                 # send email to the client mail
                 email_from = settings.EMAIL_HOST_USER
@@ -402,7 +402,8 @@ def confirm_order(request):
             items_lists.append(str(index)+'- ' +str(item))
             index +=1
 
-        items_lists = '\n'.join(items_lists)
+            
+        items_lists = '<br>'.join(items_lists)
 
         # send email to the client mail
         email_from = settings.EMAIL_HOST_USER
