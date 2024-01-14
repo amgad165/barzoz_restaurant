@@ -4,7 +4,7 @@ from django.conf import settings
 
 def mail(order,sender, items_lists,payment_type):
     
-    image_url = f"{settings.STATIC_ROOT}assets/img/Bazroz_Logo_schrift.png"
+    image_url = f"{settings.STATIC_URL}/assets/img/Bazroz_Logo_schrift.png"
 
 
     message = format_html(
