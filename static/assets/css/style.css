@@ -2312,7 +2312,7 @@ h3.section-subheading{
     letter-spacing: 4px;
     font-size: 16px;
     margin-bottom: 32px;
-    font-weight: 600;
+
     display: flex;
     align-items: center;
 
@@ -2320,8 +2320,9 @@ h3.section-subheading{
 }
 .contact_icon i{
     font-size: 32px;
-    margin-right: 10px;
-
+    
+    text-align: center;
+    padding: 10px;
 }
 #contact p {
     color: #c6a880;
@@ -2329,7 +2330,7 @@ h3.section-subheading{
     letter-spacing: 3px;
     font-size: 16px;
     margin-bottom: 0px;
-    font-weight: 600;
+
 }
 .contact_icon p{
 
@@ -2355,7 +2356,7 @@ h3.section-subheading{
         margin-bottom: 20px;
         letter-spacing: 3px;
         font-family: futurebook;
-        font-weight: 600;
+       
         display: grid;
     
     }
@@ -2375,8 +2376,8 @@ h3.section-subheading{
     font-size: 15px;
     margin-bottom: 20px;
     letter-spacing: 3px;
-    font-family: futurebook;
-    font-weight: 600;
+    font-family: futuremedium;
+
     display: grid;
 
 }
@@ -2471,7 +2472,7 @@ width: 67px;
     padding: 15px 5px 5px 5px !important;
 }
 .navbar-default .navbar-brand img{
-    width: 70%;
+    width: 95px;
     height: 15px;
     margin-left: 15px;
     margin-top: -8px;
