@@ -51,7 +51,7 @@ body {
     background-color: #222;
     font-weight: 400;
     line-height: 1.75;
-    color: #333;    
+    color: #c6a880;    
 }
 
 .master-wrapper {
@@ -2243,7 +2243,7 @@ section.tangaroa-back{
 h3.section-subheading{
     color: #c6a880;
     font-family: futuremedium;
-    font-size: 18px; 
+    font-size: 16px; 
     letter-spacing: 3px;
   
     
