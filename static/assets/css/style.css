@@ -66,11 +66,11 @@ body {
 }
 
 .text-muted {
-    color: #444
+    color: #c6a880
 }
 
 .text-primary {
-    color: #333
+    color: #c6a880
 }
 
 p {
@@ -92,7 +92,7 @@ a.active {
 }
 
 a {
-    color: #333
+    color: #c6a880
 }
 
 a:hover
@@ -543,7 +543,7 @@ fieldset[disabled] .btn-primary.active {
 .navbar-default.background--light .nav li > a,
 .navbar-default.background--light .navbar-brand,
 #headerwrap.background--light .intro-text, .navbar-default.background--light #navbar-social a, #headerwrap.background--light .slider-control a {
-    color: #333;
+    color: #c6a880;
 }
 
 .navbar-default.background--light .tcon-menu__lines, .navbar-default.background--light .tcon-menu__lines::before, .navbar-default.background--light .tcon-menu__lines::after, #headerwrap.background--light .wheel {
@@ -733,11 +733,11 @@ margin-top: 5px;
 
 header {
     text-align: center;
-    color: #333
+    color: #c6a880
 }
 
 header .intro-text {
-    color: #333
+    color: #c6a880
 }
 
 header .intro-text .intro-lead-in {
@@ -1139,7 +1139,7 @@ footer.white-wrapper .social-links li a {
     position: absolute;
     top: 50%;
     width: 100%;
-    color: #333;
+    color: #c6a880;
     background: rgba(0, 0, 0, 0);
     font-size: 36px;
     font-weight: 300;
@@ -1166,7 +1166,7 @@ footer.white-wrapper .social-links li a {
     right: 43px;
     color: #fff;
     background-color: transparent;
-    color: #333;
+    color: #c6a880;
     border: none;
     opacity: 1;
     padding: 10px 17px;
@@ -1455,7 +1455,7 @@ footer.white-wrapper .social-links li a {
         width: 70%;
     }
     .mfp-close-btn-in .mfp-close {
-        color: #333;
+        color: #c6a880;
         position: fixed;
         right: 50px !important;
         top: 14px;
