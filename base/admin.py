@@ -5,6 +5,8 @@ admin.site.register(Menu_Item)
 
 admin.site.register(Category)
 
+admin.site.register(DeliveryFee)
+
 class CouponAdmin(admin.ModelAdmin):
     list_display = ('code', 'percent_off', 'duration')
     # Exclude the stripe_coupon_id field from the admin page
