@@ -3,7 +3,23 @@ from PIL import Image
 import stripe
 from django.conf import settings
 
-# Create your models here.
+class DeliveryFee(models.Model):
+    fee = models.FloatField(default=0.0)
+
+    def save(self, *args, **kwargs):
+        # Ensure only one row exists in the DeliveryFee model
+        if not self.pk and DeliveryFee.objects.exists():
+            # If a row exists, update it
+            existing_fee = DeliveryFee.objects.first()
+            existing_fee.fee = self.fee
+            existing_fee.save()
+            return existing_fee
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Delivery Fee: {self.fee}"
+
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
     view_homepage = models.BooleanField(default=False)
@@ -52,6 +68,8 @@ class Order(models.Model):
     user_details = models.ForeignKey(
     'User_details', on_delete=models.SET_NULL,blank=True, null=True )
 
+    delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
+
     def __str__(self):
         return f"Order {self.pk}"
 
@@ -60,7 +78,9 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_total_item_price()
         if self.coupon:
-            total = total- (self.coupon.percent_off/100)*total
+            total = total - (self.coupon.percent_off / 100) * total
+        if self.delivery_fee:
+            total += self.delivery_fee.fee
         return total
     
 
@@ -77,6 +97,13 @@ class Order(models.Model):
             quantity += order_item.quantity
 
         return quantity
+    
+    def save(self, *args, **kwargs):
+    # If there is no associated delivery fee, set it to the first one in the database
+        if not self.delivery_fee_id:
+            self.delivery_fee = DeliveryFee.objects.first()
+
+        super().save(*args, **kwargs)
     
     
 
@@ -133,10 +160,3 @@ class User_details(models.Model):
 
 
 
-
-# class Coupon(models.Model):
-#     code = models.CharField(max_length=15)
-#     amount = models.FloatField()
-
-#     def __str__(self):
-#         return self.code

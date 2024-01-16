@@ -334,9 +334,9 @@ font-size: 14px !important;
                 <form action="{% url 'update_cart' %}" method="post" >
 
 			  {% csrf_token %}
-			  <a style="margin-left: 10px;" href="{% url 'main_menu' %}" class="continue">Continue Shopping</a>
+			  <a style="margin-left: 10px;" href="{% url 'main_menu' %}" class="continue">Weiter bestellen</a>
 
-			  <button type="submit" class="btn submit-button">Update Cart</button>
+			  <button type="submit" class="btn submit-button">Warenkorb aktualisieren</button>
        
 
 			</div>
@@ -389,6 +389,12 @@ font-size: 14px !important;
 			  <ul class="list-unstyled">
 
 				<div class="center-divs-mobile">
+                    {% if delivery_fee %}
+
+                    <li class="totalRow final"><span class="label">delivery fee</span>
+                        <span  class="value">€  {{delivery_fee}}
+                        </span></li>
+                    {% endif %}
                     {% if discount %}
 
                     <li class="totalRow final"><span class="label">Discount</span>
@@ -396,7 +402,7 @@ font-size: 14px !important;
                         </span></li>
                     {% endif %}
   
-				<li class="totalRow final"><span class="label">Total</span>
+				<li class="totalRow final"><span class="label">Summe</span>
 					<span id="final-total" class="value">€ {{total_price}}
 					</span></li>
                 </div>

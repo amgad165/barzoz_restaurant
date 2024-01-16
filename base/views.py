@@ -104,8 +104,13 @@ def cart(request):
         else:
             discount = None
 
+        if order.delivery_fee:
+            delivery_fee= order.delivery_fee.fee
+        else:
+            delivery_fee = None
 
-        return render(request, "cart.html", {'order_items': order_items,'total_price':total_price,"cart_count":cart_count,"discount":discount})
+
+        return render(request, "cart.html", {'order_items': order_items,'total_price':total_price,"cart_count":cart_count,"discount":discount,"delivery_fee":delivery_fee})
 
     except Order.DoesNotExist:
         # Handle the case where the order doesn't exist
@@ -153,8 +158,13 @@ def checkout(request):
         else:
             discount = None
 
+        if order.delivery_fee:
+            delivery_fee= order.delivery_fee.fee
+        else:
+            delivery_fee = None
 
-        return render(request, "checkout.html", {'order_items': order_items,'total_price':total_price,'subtotal_price':subtotal_price,"cart_count":cart_count , "discount":discount,"order":order})
+
+        return render(request, "checkout.html", {'order_items': order_items,'total_price':total_price,'subtotal_price':subtotal_price,"cart_count":cart_count , "discount":discount,"order":order,"delivery_fee":delivery_fee})
 
     except Order.DoesNotExist:
         # Handle the case where the order doesn't exist
@@ -402,7 +412,6 @@ def confirm_order(request):
             items_lists.append(str(index)+'- ' +str(item))
             index +=1
 
-            
         items_lists = '<br>'.join(items_lists)
 
         # send email to the client mail

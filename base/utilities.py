@@ -56,7 +56,7 @@ def mail(order,sender, items_lists,payment_type):
 
     # Send email to bazroz mail
     send_mail(
-        'Order arrived',
+        'Neue Bestellung',
         message,
         from_email=sender,
         recipient_list=[sender],

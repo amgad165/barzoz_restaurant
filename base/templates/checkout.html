@@ -261,9 +261,9 @@ padding: 10px !important;
                               </div>
                               
                               <div class="form-group">
-                                <label for="exampleInputEmail1">Street address</label>
+                                <label for="exampleInputEmail1">Adresse</label>
                                 <input required name="street_address" type="input" class="form-control" id="exampleInputEmail1" placeholder="Adresse">
-                                <input required name="hausnummer" style="margin-top: 5px;" type="input" class="form-control" id="exampleInputEmail1" placeholder="Hausnummer, Stiege, Stock, Tur">
+                                <input required name="hausnummer" style="margin-top: 5px;" type="input" class="form-control" id="exampleInputEmail1" placeholder="Hausnummer, Stiege, TÜR">
 
                               </div>
 
@@ -280,7 +280,7 @@ padding: 10px !important;
                               </div>
 
                               <div class="form-group">
-                                <label for="exampleInputEmail1">E-mail-Adresse *</label>
+                                <label for="exampleInputEmail1">E-Mail-Adresse *</label>
                                 <input required name="email" type="email" class="form-control" id="exampleInputEmail1">
                               </div>
                               <div class="form-group">
@@ -288,8 +288,8 @@ padding: 10px !important;
                               </div>
                               
                               <div class="form-group">
-                                <label for="exampleInputEmail1">Um Hinweise (optional)</label>
-                                <textarea  class="form-control" name="um_hinweise" id="exampleInputEmail1" cols="30" rows="5" placeholder="Hinweise zu Ihrer Bestellung, wie z.B Besondere Hinweise fur die Lieferung"></textarea>
+                                <label for="exampleInputEmail1">Hinweise (optional)</label>
+                                <textarea  class="form-control" name="um_hinweise" id="exampleInputEmail1" cols="30" rows="5" placeholder="Hinweise zu Ihrer Bestellung, wie Z.B. keine Zwiebeln"></textarea>
                                 
                               </div>
                      
@@ -304,7 +304,7 @@ padding: 10px !important;
                                 </div>
 
                             <div class="card-body">
-                                <h2>Produkt</h2>
+                                <h2>Bestellung</h2>
                                 <div class="line"></div>
       
                     {% for order_item in order_items %}
@@ -330,9 +330,16 @@ padding: 10px !important;
                     </div>
 
                     {% endif %}
-          
-                        <div style="margin-top: 20px;" class="order-item-container">
-                            <p>Total</p>
+
+                    {% if delivery_fee %}
+                    <div style="margin-top: 20px;" class="order-item-container">
+                        <p>Delivery Fee</p>
+                        <p style="font-size: 1.4em;font-weight: bolder;">€ {{delivery_fee}}</p>
+                        
+                    </div>
+                    {% endif %}
+                        <div  class="order-item-container">
+                            <p>Gesamt (inkl. MwSt.)</p>
                             <p style="font-size: 1.5em;font-weight: bolder;">€ {{total_price}}</p>
                             
                         </div>
@@ -344,7 +351,7 @@ padding: 10px !important;
                             <div  class="form-check">
                                 <input  class="form-check-input custom-control-input" type="radio" value="on_delivery" name="payment_type" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  Cash on delivery
+                                    Barzahlung bei der Zustellung
                                 </label>
                               </div>
                               <!-- <div class="form-check">
@@ -354,7 +361,8 @@ padding: 10px !important;
                                 </label>
                               </div> -->
                         </div>
-                        <p class="details"> Your personal data will be used to process your order , support your experience throught this website, and for other purposes descrived in our terms</p>
+                        <p class="details">Ihre persönlichen Daten werden verwendet, um Ihre Bestellung zu verarbeiten, Ihr Erlebnis auf dieser Website zu unterstützen und für andere in unseren Geschäftsbedingungen beschriebene Zwecke.
+                        </p>
                             <button style="width: 100%;" type="submit" class="custom-button btn btn-primary">ZAHLEN</button>
                     </div>
                           </div>
