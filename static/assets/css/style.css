@@ -1635,7 +1635,7 @@ footer.white-wrapper .social-links li a {
     }
 
     .navbar-default .navbar-brand img{
-        width: 81%;
+        width: 216px;
         height: 29px;
         margin-left: 70px;
         margin-top: -11px;
@@ -2644,7 +2644,7 @@ footer p {
     }
 
     .navbar-default .navbar-brand img{
-        width: 70%;
+        width: 100px;
         height: 20px;
         margin-left: 0px;
         margin-top: -15px;
@@ -2723,7 +2723,7 @@ footer p {
         }
 
         .navbar-default .navbar-brand img{
-            width: 62%;
+            width: 160px;
             height: 25px;
             margin-left: 70px;
             margin-top: -15px;
