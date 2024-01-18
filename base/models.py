@@ -30,7 +30,7 @@ class Category(models.Model):
 
 class Menu_Item(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=255,blank=True, null=True)
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.FileField(upload_to='menu_images/')
