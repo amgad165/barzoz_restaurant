@@ -469,8 +469,7 @@ def download_pdf(request):
     pdf_path = "static_files/assets/pdf/Speisekarte.pdf"
     pdf_url = f"https://{s3_base_url}/{pdf_path}"
 
-    response = HttpResponse(content_type='application/pdf')
+    response = FileResponse(open(pdf_url, 'rb'), content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
 
-    # Use FileResponse directly with the S3 URL
-    return FileResponse(requests.get(pdf_url).content, content_type='application/pdf')
+    return response
