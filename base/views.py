@@ -41,6 +41,17 @@ def main_menu(request):
     return render(request, "main_menu.html", context)
 
 
+def menu(request):
+    categories = Category.objects.all()
+    menu_items_by_category = {}
+
+    for category in categories:
+        menu_items_by_category[category.name] = Menu_Item.objects.filter(category=category)
+
+    context = {'menu_items_by_category': menu_items_by_category}
+    
+    return render(request, "menu.html", context)
+
 def add_to_cart(request):
     
     if request.method == 'POST':

@@ -26,6 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name='home'),
     path('main_menu', views.main_menu,name='main_menu'),
+    
+    # without add to cart
+    path('menu', views.menu,name='menu'),
+
     path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
     path('cart/', views.cart, name='cart'),
     path('update_cart/', views.update_cart, name='update_cart'),

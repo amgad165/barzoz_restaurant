@@ -27,31 +27,8 @@
 <style>
 
 @media (min-width: 768px){
-.navbar-default {
-    padding: unset !important;
-    border: 0;
-}
 
-.navbar-default a{
-    margin-left: 10px;
-    margin-top: 15px;
-   
-}
 
-.navbar-default{
-    padding: unset !important;
-}
-.navbar-brand{
-
-    line-height: normal !important;
-    margin-top: 10px !important;
-    margin-left: 0px !important;
-    
-}
-.navbar-brand img{
-    margin-left: 60px !important;
-
-}
 
 .logo img{
     margin-left: 10px !important;
@@ -158,14 +135,17 @@ margin-bottom: 15px;
 padding: 20px 0;
 }
 
-
+.heading-font h1 {
+    letter-spacing: 8px;
+    font-size: 22px;
+}
 }
 
 
 @media (min-width: 1700px){
 .navbar-brand{
    
-    margin-top: 10px !important;
+    margin-top: 0px !important;
 
     
 }
@@ -187,13 +167,19 @@ padding: 20px 0;
         </div>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default " data-wow-delay="0.2s">
-            <div class="container-fluid components-right-adjust">
+        <nav class="navbar navbar-default navbar-fixed-top fadeInDown " data-wow-delay="0.2s">
+            <div class="container-fluid home">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll ">
-
-                    <a class="navbar-toggle  visible-xs" href="{% url 'cart' %} " class="page-scroll"><i style="color: white;" id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a>
-                    {% comment %} <a class="logo smoothie" href="{% url 'home' %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a> {% endcomment %}
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                   
+                    
+                    <!-- <a class="logo smoothie" href="{% url 'home'  %}"><img  src="{% static 'assets/img/logo/logo.png' %}"> </a>  -->
                     
                    <a class="navbar-brand smoothie " href="{% url 'home'  %}"><img  src="{% static 'assets/img/nur_name_Bazroz.png' %}"> </span></a>
                 </div>
@@ -201,8 +187,11 @@ padding: 20px 0;
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
-
-                        <li><a href="{% url 'cart' %} " class="page-scroll no-underline"> W A R E N K O R B   <i  id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
+                        <li><a href="{% url 'home'  %}#headerwrap" class="page-scroll">H E I M</a></li>  
+                        <li><a href="{% url 'home'  %}#about" class="page-scroll">Ü B E R &nbsp U N S</a></li>  
+                        <li><a href="{% url 'home'  %}#the-menu" class="page-scroll">S P E I S E N</a></li>    
+                        <li><a href="{% url 'home'  %}#contact" class="page-scroll">K O N T A K T</a></li>      
+                        <li><a  href="{% url 'menu'  %}" class="page-scroll main_menu_link btn  no-underline">MENU</a></li>      
 
 
 
@@ -219,17 +208,48 @@ padding: 20px 0;
         </nav>
 
 
+        <!-- Header -->
+        <header id="headerwrap" class="backstretched fullheight covered-section">
+            
+            <div class="container-fluid fullheight">
+                <div class="vertical-center row">
+                    <!-- <div class="col-sm-1 pull-left text-center slider-control match-height">
+                        <a href="#" class="prev-bs-slide vertical-center wow fadeInLeft" data-wow-delay="0.5s">
+                            
+                            <img src="{% static 'assets/img/arrow_backward.svg' %}" alt="">    
+                        </a>
+                    </div> -->
+                    <div class="intro-text text-center smoothie col-sm-12 match-height">                    
+                        <div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.5s">
+                           
+                        <h1>Unsere Speisekarte</h1>
+                        </div>              
+                    </div>
+                    <!-- <div class="col-sm-1 pull-right text-center slider-control match-height">
+                        <a href="#" class="next-bs-slide vertical-center wow fadeInRight" data-wow-delay="0.5s">
+                            
+                        <img src="{% static 'assets/img/arrow_forward.svg' %}" alt="">    
+                    
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="vertical-line1 visible-xl visible-lg"></div>
+            <div class="vertical-line2 visible-xl visible-lg"></div> 
+    
+        </header>
+
+
 
         <section id="main-menu" class="green-back ">
 
-            {% comment %} <div class="vertical-line1 visible-xl visible-lg"></div>
-            <div class="vertical-line2 visible-xl visible-lg"></div> {% endcomment %}
-            <div class="section-inner">
+            <div class="section-inner ">
 
 
 {% for category, menu_items in menu_items_by_category.items %}
 
                  <div class="container wow fadeIn">
+
                     <div class="row">
                         <div class="col-lg-12 text-center mb50 heading_div">
                             <h2 class="section-heading"><img src="{% static 'assets/img/bg/title_icon.png' %}" alt="">&nbsp;&nbsp; {{ category }} &nbsp;&nbsp;<img src="{% static 'assets/img/bg/title_icon.png' %}" alt=""></h2>
@@ -266,9 +286,8 @@ padding: 20px 0;
                                             <h3>€{{ item.price }}</h3>
                                         </div>
 
-                                        <div class="col-2">
-                        
-                                            <button  data-item-id="{{ item.id }}"  class="menu-cart btn btn-primary add-to-cart-button"><i  class="fa fa-shopping-cart "></i></button>
+                                        <div class="col-1">
+                         
                                             
                                         </div>
                                         </div>
@@ -293,7 +312,9 @@ padding: 20px 0;
                 </div>
                 {% endfor %}
 
+                
             </div>
+
         </section>
 
 
@@ -322,7 +343,7 @@ padding: 20px 0;
        'use strict';
         jQuery('#headerwrap').backstretch([
           "{% static 'assets/img/bg/16342.jpg' %}",
-          "{% static 'assets/img/bg/bg-main.jpg' %}",
+
         //   "assets/img/bg/bg3.jpg",
         ], {duration: 8000, fade: 500});
     });
@@ -336,48 +357,24 @@ padding: 20px 0;
 
 
 
+
+
 <script>
     $(document).ready(function() {
-        
-        $('.add-to-cart-button').click(function() {
+        // Calculate the total height of the covered sections
+        var totalHeight = 0;
+        $(".covered-section").each(function() {
+            console.log(totalHeight)
+            totalHeight += $(this).height();
 
+});
 
-            var itemId = $(this).data('item-id');
-            // var quantity = parseInt($('#quantity').val());
-            var data = {
-                id: itemId,
-                // qty: quantity,
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            };
-            
-            $.ajax({
-                type: 'POST',
-                url: '{% url 'add_to_cart' %}',
-                data: data,
-                success: function(response) {
+        // Set the height of the vertical line
+        $(".vertical-line1").height(totalHeight);
+        $(".vertical-line2").height(totalHeight);
 
-                    // Update the total quantity in the cart display
-                    var totalQuantity = response.cart_items_count
-
-                    // $('#total-quantity').text(totalQuantity);
-					// Display the badge and animate it
-					$('.cart-badge').text(totalQuantity).show().animate({
-							fontSize: '16px',
-						}, 200).animate({
-							fontSize: '12px',
-						}, 200);
-
-                },
-                error: function(xhr) {
-                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
-                }
-            });
-        });
     });
 </script>
-
-
-
 
 
 </body>

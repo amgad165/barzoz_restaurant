@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="google-site-verification" content="a5_vhn4wKGzdF4sPt6wVJQ1tLBTRoDUQdI3C4JSkSYE" />
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="{% static 'assets/img/ico/favicon.png' %}">
@@ -27,7 +28,7 @@
         <h2>Cookie Einstellungen</h2>
       </header>
       <div class="data">
-        <p>Gemäß unseren Datenschutzrichtlinien verwenden wir Cookies auf unserer Website. Einige davon sind unerlässlich, während andere die Funktionalität verbessern und Ihr Nutzungserlebnis optimieren.</p>
+        <p style="font-family: futurebook;">Gemäß unseren Datenschutzrichtlinien verwenden wir Cookies auf unserer Website. Einige davon sind unerlässlich, während andere die Funktionalität verbessern und Ihr Nutzungserlebnis optimieren.</p>
       </div>
       <div class="buttons ">
         <button class="button" id="acceptBtn">Ich akzeptiere</button>
@@ -81,7 +82,7 @@
                         <li><a href="#about" class="page-scroll">Ü B E R &nbsp U N S</a></li>  
                         <li><a href="#the-menu" class="page-scroll">S P E I S E N</a></li>    
                         <li><a href="#contact" class="page-scroll">K O N T A K T</a></li>      
-                        <li><a  href="{% url 'main_menu'  %}" class="page-scroll main_menu_link btn  no-underline">B E S T E L L E N</a></li>      
+                        <li><a  href="{% url 'menu'  %}" class="page-scroll main_menu_link btn  no-underline">MENU</a></li>      
 
 
 
@@ -226,10 +227,8 @@
                                         </div>
 
                               
-                                            {% if item.description %}
-                                            <p>{{ item.description }}</p>
-                                           
-                                            {% endif %}
+
+                                        <p>{{ item.description }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +250,7 @@
                 <div style="display: flex;align-items: center;justify-content: center; margin-top: 25px;" class="row">
                     <div  class="col-3">
                         
-                  <a href="{% url 'main_menu'  %}"><button type="button" class="custom-button btn btn-primary">S P E I S E K A R T E</button></a>  
+                  <a href="{% url 'menu'  %}"><button type="button" class="custom-button btn btn-primary">S P E I S E K A R T E</button></a>  
                 </div>
                    </div>
             </div>
