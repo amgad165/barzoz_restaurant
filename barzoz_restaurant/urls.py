@@ -38,7 +38,7 @@ urlpatterns = [
     path('add_coupon/', views.add_coupon, name='add_coupon'),
     path("create-checkout-session/<int:pk>/",CreateStripeCheckoutSessionView.as_view(),name="create-checkout-session",
     ),
-    path('Speisekarte/', views.download_pdf, name='download_pdf'),
+    path('speisekarte/', views.download_pdf, name='download_pdf'),
 
     path('confirm_order/', views.confirm_order, name='confirm_order'),
 
