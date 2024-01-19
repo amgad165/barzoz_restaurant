@@ -469,15 +469,12 @@ def impressum(request):
 def download_pdf(request):
     s3_base_url = settings.AWS_S3_CUSTOM_DOMAIN
     pdf_path = "static_files/assets/pdf/Speisekarte.pdf"
+    s3_url = f"https://{s3_base_url}/{pdf_path}"
 
-    # Use boto3 to generate a pre-signed URL with AWS Signature Version 4
-    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
+    # Use boto3 to generate a pre-signed URL
+    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
     expiration_time = 600  # Expiry time in seconds (adjust as needed)
-    
-    try:
-        presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time, HttpMethod='GET', SigV4=True)
-        
-        # Redirect the user to the generated URL
-        return HttpResponseRedirect(presigned_url)
-    except:
-        return HttpResponse("Error: AWS credentials not available.")
+    presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time)
+
+    # Redirect the user to the generated URL
+    return HttpResponseRedirect(presigned_url)
