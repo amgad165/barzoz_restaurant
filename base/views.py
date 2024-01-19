@@ -16,6 +16,9 @@ from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 from . utilities import mail
+from django.templatetags.static import static
+from django.views.static import serve
+from django.http import HttpResponse
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -459,3 +462,11 @@ def impressum(request):
     return render(request,"impressum.html")
 
 
+def download_pdf(request):
+    pdf_url = static('assets/pdf/' + "Speisekarte.pdf")
+
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
+
+    return serve(request, pdf_url, settings.STATIC_URL)
