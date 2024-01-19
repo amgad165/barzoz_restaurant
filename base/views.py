@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseServerError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import requests
 from .models import Menu_Item, OrderItem, Order, Category , Coupon , User_details
 from django.contrib.sessions.models import Session
 from django.utils import timezone
