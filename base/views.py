@@ -463,11 +463,10 @@ def impressum(request):
 
 
 def download_pdf(request):
+    s3_base_url = settings.AWS_S3_CUSTOM_DOMAIN
     pdf_path = "static_files/assets/pdf/Speisekarte.pdf"
-    pdf_url = static(pdf_path)
+    pdf_url = f"https://{s3_base_url}/{pdf_path}"
 
-    # Print for debugging purposes
-    print('Generated S3 PDF URL:', pdf_url)
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
