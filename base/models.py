@@ -23,10 +23,16 @@ class DeliveryFee(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=255)
     view_homepage = models.BooleanField(default=False)
+    display_order = models.PositiveIntegerField(default=0)  # New field for manual ordering
 
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ['display_order', 'name']  # Order categories by display_order, then by name
+
+
 
 class Menu_Item(models.Model):
     name = models.CharField(max_length=255)
@@ -35,9 +41,13 @@ class Menu_Item(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.FileField(upload_to='menu_images/')
 
-    def __str__(self):
-        return self.name
+    display_order = models.PositiveIntegerField(default=0)  # New field for manual ordering
 
+    def __str__(self):
+        return '('+self.category.name+') '+ self.name
+
+    class Meta:
+        ordering = ['display_order', 'name']  # Order categories by display_order, then by name
 
 
             
