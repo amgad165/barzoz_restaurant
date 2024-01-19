@@ -472,9 +472,9 @@ def download_pdf(request):
     s3_url = f"https://{s3_base_url}/{pdf_path}"
 
     # Use boto3 to generate a pre-signed URL
-    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
-    expiration_time = 600  # Expiry time in seconds (adjust as needed)
-    presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time)
+    # s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+    # expiration_time = 600  # Expiry time in seconds (adjust as needed)
+    # presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time)
 
     # Redirect the user to the generated URL
-    return HttpResponseRedirect(presigned_url)
+    return HttpResponseRedirect(s3_url)
