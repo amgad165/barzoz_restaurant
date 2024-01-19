@@ -18,7 +18,8 @@ from django.core.mail import send_mail
 from . utilities import mail
 from django.templatetags.static import static
 from django.views.static import serve
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -470,4 +471,5 @@ def download_pdf(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
 
-    return serve(request, pdf_url) 
+    # Use FileResponse directly with the S3 URL
+    return FileResponse(requests.get(pdf_url).content, content_type='application/pdf')
