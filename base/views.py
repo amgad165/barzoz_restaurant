@@ -471,10 +471,19 @@ def download_pdf(request):
     pdf_path = "static_files/assets/pdf/Speisekarte.pdf"
     s3_url = f"https://{s3_base_url}/{pdf_path}"
 
-    # Use boto3 to generate a pre-signed URL
-    # s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
-    # expiration_time = 600  # Expiry time in seconds (adjust as needed)
-    # presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time)
+    # Use boto3 to download the file from S3
+    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
 
-    # Redirect the user to the generated URL
-    return HttpResponseRedirect(s3_url)
+    try:
+        # Get the file from S3
+        response = s3_client.get_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=pdf_path)
+
+        # Read the content of the file
+        file_content = response['Body'].read()
+
+        # Set Content-Disposition header for force download
+        response = HttpResponse(file_content, content_type=response['ContentType'])
+        response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
+        return response
+    except :
+        return HttpResponse("Error: AWS credentials not available.")
