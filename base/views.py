@@ -20,6 +20,8 @@ from . utilities import mail
 from django.templatetags.static import static
 from django.views.static import serve
 from django.http import HttpResponse, FileResponse
+import boto3
+from django.http import HttpResponseRedirect
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -467,9 +469,12 @@ def impressum(request):
 def download_pdf(request):
     s3_base_url = settings.AWS_S3_CUSTOM_DOMAIN
     pdf_path = "static_files/assets/pdf/Speisekarte.pdf"
-    pdf_url = f"https://{s3_base_url}/{pdf_path}"
+    s3_url = f"https://{s3_base_url}/{pdf_path}"
 
-    response = FileResponse(open(pdf_url, 'rb'), content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
+    # Use boto3 to generate a pre-signed URL
+    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
+    expiration_time = 600  # Expiry time in seconds (adjust as needed)
+    presigned_url = s3_client.generate_presigned_url('get_object', Params={'Bucket': settings.AWS_STORAGE_BUCKET_NAME, 'Key': pdf_path}, ExpiresIn=expiration_time)
 
-    return response
+    # Redirect the user to the generated URL
+    return HttpResponseRedirect(presigned_url)
