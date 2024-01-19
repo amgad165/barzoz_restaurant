@@ -472,7 +472,7 @@ def download_pdf(request):
     s3_url = f"https://{s3_base_url}/{pdf_path}"
 
     # Use boto3 to download the file from S3
-    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY, region_name=settings.AWS_S3_REGION_NAME)
+    s3_client = boto3.client('s3', aws_access_key_id=settings.AWS_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY)
 
     try:
         # Get the file from S3
