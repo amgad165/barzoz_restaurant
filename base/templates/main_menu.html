@@ -275,7 +275,10 @@ padding: 20px 0;
                                     </div>
                                         <div class="row">
                                         <div class="col-xs-8">
-                                        <p class="menu-description">{{ item.description }} </p>
+                                            {% if {{ item.description }} %}
+                                            <p class="menu-description">{{ item.description }} </p>
+                                       
+                                            {% endif %}
                                     </div>
                                 </div>
                                     
