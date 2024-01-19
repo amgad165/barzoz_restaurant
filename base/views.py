@@ -463,10 +463,14 @@ def impressum(request):
 
 
 def download_pdf(request):
-    pdf_url = static('assets/pdf/' + "Speisekarte.pdf")
-
     
+    pdf_path = "assets/pdf/Speisekarte.pdf"
+
+    # Print for debugging purposes
+ 
+    print('STATICFILES_DIRS[0]:', settings.STATICFILES_DIRS[0])
+
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="Speisekarte.pdf"'
 
-    return serve(request, pdf_url, settings.STATIC_URL)
+    return serve(request, pdf_path, document_root=settings.STATICFILES_DIRS[0])
