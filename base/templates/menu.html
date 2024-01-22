@@ -11,6 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+
  <link rel="shortcut icon" href="{% static 'assets/img/ico/favicon.png' %}">
 
     <title>BAZROZ</title>
@@ -18,10 +19,9 @@
 {% include "includes/links.html" %}
 
    
-    <style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
-
-    </style>
 
 
 <style>
@@ -268,7 +268,9 @@ padding: 20px 0;
                             <div class="food-menu-item">
                                 <div class="row">
                                     <div class="col-xs-3 col-sm-2">
-                                        <img class="menu-image" src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
+                                        <a href="{{ MEDIA_URL }}{{ item.image.url }}" class="menu-image">
+                                            <img src="{{ MEDIA_URL }}{{ item.image.url }}" class="img-responsive">
+                                        </a>
                                     </div>
                                     <div class="col-xs-9 col-sm-10">
                                         
@@ -294,7 +296,7 @@ padding: 20px 0;
                                     </div>
                                         <div class="row">
                                         <div class="col-xs-8">
-                                            {% if item.description %}
+                                            {% if  item.description  %}
                                             <p class="menu-description">{{ item.description }} </p>
                                        
                                             {% endif %}
@@ -380,6 +382,19 @@ padding: 20px 0;
     });
 </script>
 
+
+<script>
+    $(document).ready(function () {
+        $('.menu-image').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            mainClass: 'mfp-img-mobile',
+            image: {
+                verticalFit: true
+            }
+        });
+    });
+</script>
 
 </body>
 
