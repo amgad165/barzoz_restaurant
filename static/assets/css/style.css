@@ -2528,7 +2528,11 @@ background-color: #c6a880 !important;
 .menu-item-info h3 {
 
 font-size: 12px;
-margin-top: 10px;
+margin-top: 2px;
+}
+
+.menu-item-info{
+    align-items: start;
 }
 .food-menu-item p {
     font-size: 8px;
