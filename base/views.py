@@ -531,7 +531,7 @@ def get_orders(request):
             return Response({"error": "Invalid API key"}, status=401)
 
         # Retrieve orders with casher=False
-        orders = Order.objects.filter(casher=False)
+        orders = Order.objects.filter(casher=False, ordered = True)
 
         # Serialize orders and their related models
         serializer = OrderSerializer(orders, many=True)
