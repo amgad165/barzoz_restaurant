@@ -79,7 +79,7 @@ class Order(models.Model):
     user_details = models.ForeignKey(
     'User_details', on_delete=models.SET_NULL,blank=True, null=True )
 
-    delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
+    delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, null=True)
 
     casher = models.BooleanField(default=False)  # New field
 
