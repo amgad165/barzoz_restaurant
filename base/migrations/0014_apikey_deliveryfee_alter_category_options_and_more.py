@@ -42,11 +42,7 @@ class Migration(migrations.Migration):
             name='payment_type',
             field=models.CharField(choices=[('cash', 'Cash'), ('cart', 'Cart')], default='cash', max_length=10),
         ),
-        migrations.AlterField(
-            model_name='menu_item',
-            name='description',
-            field=models.CharField(blank=True, max_length=255, null=True),
-        ),
+
         migrations.AlterField(
             model_name='menu_item',
             name='image',
