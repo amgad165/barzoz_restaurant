@@ -7,6 +7,14 @@ admin.site.register(Category)
 
 admin.site.register(DeliveryFee)
 
+
+class APIKeyAdmin(admin.ModelAdmin):
+    list_display = ('key',)
+    readonly_fields = ('key',)
+
+admin.site.register(APIKey, APIKeyAdmin)  # Register the custom admin class
+
+
 class CouponAdmin(admin.ModelAdmin):
     list_display = ('code', 'percent_off', 'duration')
     # Exclude the stripe_coupon_id field from the admin page
@@ -20,7 +28,7 @@ admin.site.register(Coupon, CouponAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id','order_summary', 'get_user_name', 'get_user_telefon', 'get_user_email',
-                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date', 'being_delivered','payment_type',
+                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date', 'being_delivered','casher','payment_type',
                     'get_total')
     list_editable = ('being_delivered',)  # Add this line to make 'being_delivered' editable
 
@@ -72,4 +80,7 @@ class OrderAdmin(admin.ModelAdmin):
         return obj.being_delivered
     being_delivered.short_description = 'Delivered'
 
+    def casher(self, obj):
+        return obj.casher
+    casher.short_description = 'Delivered'
 admin.site.register(Order, OrderAdmin)

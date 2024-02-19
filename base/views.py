@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseServerError, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
-from .models import Menu_Item, OrderItem, Order, Category , Coupon , User_details
+from .models import Menu_Item, OrderItem, Order, Category , Coupon , User_details , APIKey
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.contrib import messages
@@ -22,7 +22,9 @@ from django.views.static import serve
 from django.http import HttpResponse, FileResponse
 import boto3
 from django.http import HttpResponseRedirect
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import serializers
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -487,3 +489,51 @@ def download_pdf(request):
         return response
     except :
         return HttpResponse("Error: AWS credentials not available.")
+    
+
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_details
+        fields = ['vorname','nachname','bezirk','street_address','hausnummer','plz_zip','telefon','email','um_hinweise']
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    order_details = serializers.SerializerMethodField()
+
+    class Meta:
+        model = OrderItem
+        fields = ['order_details']
+
+    def get_order_details(self, obj):
+        return str(obj)
+    
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True, read_only=True)
+    user_details = UserDetailsSerializer()  # Include User_details information
+    total_order_price = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Order
+        fields = ['id','items','ordered_date','total_items_price','payment_type','coupon','payment_type','user_details']
+
+    def get_total_order_price(self, obj):
+        return obj.get_total()
+    
+@api_view(['GET'])
+def get_orders(request):
+    # Check if the request contains a valid API key
+    api_key = request.headers.get('API-Key')
+    if not APIKey.objects.filter(key=api_key).exists():
+        return Response({"error": "Invalid API key"}, status=401)
+
+    # Retrieve orders with casher=False
+    orders = Order.objects.filter(casher=False)
+
+    # Serialize orders and their related models
+    serializer = OrderSerializer(orders, many=True)
+    data = serializer.data
+    
+    # Update casher to True for retrieved orders
+    orders.update(casher=True)
+    
+    return Response(data)

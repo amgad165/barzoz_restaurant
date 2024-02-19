@@ -2,6 +2,7 @@ from django.db import models
 from PIL import Image
 import stripe
 from django.conf import settings
+import secrets
 
 class DeliveryFee(models.Model):
     fee = models.FloatField(default=0.0)
@@ -58,7 +59,7 @@ class OrderItem(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.quantity} of {self.menu_item.name}"
+        return f"{self.quantity} x {self.menu_item.name}"
 
     def get_total_item_price(self):
         return self.quantity * self.menu_item.price
@@ -79,6 +80,8 @@ class Order(models.Model):
     'User_details', on_delete=models.SET_NULL,blank=True, null=True )
 
     delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
+
+    casher = models.BooleanField(default=False)  # New field
 
     def __str__(self):
         return f"Order {self.pk}"
@@ -170,3 +173,11 @@ class User_details(models.Model):
 
 
 
+class APIKey(models.Model):
+    key = models.CharField(max_length=100, unique=True)
+
+    def save(self, *args, **kwargs):
+        if not self.key:
+            # Generate a unique API key
+            self.key = secrets.token_hex(32)  # Generates a random 64-character hex string
+        super().save(*args, **kwargs)

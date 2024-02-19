@@ -41,6 +41,8 @@ urlpatterns = [
     path('speisekarte/', views.download_pdf, name='download_pdf'),
 
     path('confirm_order/', views.confirm_order, name='confirm_order'),
+    
+    path('api/get-orders/', views.get_orders, name='get_orders'),
 
     path('cookies_details/', views.cookies_details, name='cookies_details'),
     path('Datenschutzerklarung/', views.Datenschutzerklarung, name='Datenschutzerklarung'),
