@@ -541,6 +541,7 @@ def get_orders(request):
         orders.update(casher=True)
 
         return Response(data)
+    
     except Exception as e:
         # Catch any exception that occurs and return a custom error response
         return Response({"error": str(e)}, status=500)
