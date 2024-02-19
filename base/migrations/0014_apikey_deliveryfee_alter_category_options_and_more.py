@@ -18,13 +18,7 @@ class Migration(migrations.Migration):
                 ('key', models.CharField(max_length=100, unique=True)),
             ],
         ),
-        migrations.CreateModel(
-            name='DeliveryFee',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fee', models.FloatField(default=0.0)),
-            ],
-        ),
+
         migrations.AlterModelOptions(
             name='category',
             options={'ordering': ['display_order', 'name']},
