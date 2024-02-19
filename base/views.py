@@ -25,6 +25,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import serializers
+from rest_framework.exceptions import APIException
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -523,19 +524,23 @@ class OrderSerializer(serializers.ModelSerializer):
     
 @api_view(['GET'])
 def get_orders(request):
-    # Check if the request contains a valid API key
-    api_key = request.headers.get('API-Key')
-    if not APIKey.objects.filter(key=api_key).exists():
-        return Response({"error": "Invalid API key"}, status=401)
+    try:
+        # Check if the request contains a valid API key
+        api_key = request.headers.get('API-Key')
+        if not APIKey.objects.filter(key=api_key).exists():
+            return Response({"error": "Invalid API key"}, status=401)
 
-    # Retrieve orders with casher=False
-    orders = Order.objects.filter(casher=False)
+        # Retrieve orders with casher=False
+        orders = Order.objects.filter(casher=False)
 
-    # Serialize orders and their related models
-    serializer = OrderSerializer(orders, many=True)
-    data = serializer.data
-    
-    # Update casher to True for retrieved orders
-    orders.update(casher=True)
-    
-    return Response(data)
+        # Serialize orders and their related models
+        serializer = OrderSerializer(orders, many=True)
+        data = serializer.data
+
+        # Update casher to True for retrieved orders
+        orders.update(casher=True)
+
+        return Response(data)
+    except Exception as e:
+        # Catch any exception that occurs and return a custom error response
+        return Response({"error": str(e)}, status=500)
