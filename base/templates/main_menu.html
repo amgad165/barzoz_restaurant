@@ -187,17 +187,15 @@ padding: 20px 0;
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="main-navigation">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{% url 'home'  %}#headerwrap" class="page-scroll">H O M E</a></li>  
-                        <li><a href="{% url 'home'  %}#about" class="page-scroll">Ü B E R &nbsp U N S</a></li>  
-                        <li><a href="{% url 'home'  %}#the-menu" class="page-scroll">S P E I S E N</a></li>    
-                        <li><a href="{% url 'home'  %}#contact" class="page-scroll">K O N T A K T</a></li>      
-                        <li><a  href="{% url 'menu'  %}" class="page-scroll main_menu_link btn  no-underline">MENU</a></li>      
+
+                        <li><a href="{% url 'cart' %} " class="page-scroll no-underline"> W A R E N K O R B   <i  id="cart" class="fa fa-shopping-cart"></i> <span class="cart-badge" id="cart-badge">{{ total_quantity }}</span></a></li>      
 
 
 
                     </ul>
 
                 </div>
+
 
                 
                 <!-- /.navbar-collapse -->         
