@@ -4,21 +4,21 @@ import stripe
 from django.conf import settings
 import secrets
 
-# class DeliveryFee(models.Model):
-#     fee = models.FloatField(default=0.0)
+class DeliveryFee(models.Model):
+    fee = models.FloatField(default=0.0)
 
-#     def save(self, *args, **kwargs):
-#         # Ensure only one row exists in the DeliveryFee model
-#         if not self.pk and DeliveryFee.objects.exists():
-#             # If a row exists, update it
-#             existing_fee = DeliveryFee.objects.first()
-#             existing_fee.fee = self.fee
-#             existing_fee.save()
-#             return existing_fee
-#         return super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        # Ensure only one row exists in the DeliveryFee model
+        if not self.pk and DeliveryFee.objects.exists():
+            # If a row exists, update it
+            existing_fee = DeliveryFee.objects.first()
+            existing_fee.fee = self.fee
+            existing_fee.save()
+            return existing_fee
+        return super().save(*args, **kwargs)
 
-#     def __str__(self):
-#         return f"Delivery Fee: {self.fee}"
+    def __str__(self):
+        return f"Delivery Fee: {self.fee}"
 
 
 class Category(models.Model):
@@ -79,7 +79,7 @@ class Order(models.Model):
     user_details = models.ForeignKey(
     'User_details', on_delete=models.SET_NULL,blank=True, null=True )
 
-    # delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
+    delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
 
     casher = models.BooleanField(default=False)  # New field
 
@@ -111,12 +111,12 @@ class Order(models.Model):
 
         return quantity
     
-    # def save(self, *args, **kwargs):
-    # # If there is no associated delivery fee, set it to the first one in the database
-    #     if not self.delivery_fee_id:
-    #         self.delivery_fee = DeliveryFee.objects.first()
+    def save(self, *args, **kwargs):
+    # If there is no associated delivery fee, set it to the first one in the database
+        if not self.delivery_fee_id:
+            self.delivery_fee = DeliveryFee.objects.first()
 
-    #     super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
     
     
 

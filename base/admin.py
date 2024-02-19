@@ -5,7 +5,7 @@ admin.site.register(Menu_Item)
 
 admin.site.register(Category)
 
-# admin.site.register(DeliveryFee)
+admin.site.register(DeliveryFee)
 
 
 class APIKeyAdmin(admin.ModelAdmin):
