@@ -4,21 +4,21 @@ import stripe
 from django.conf import settings
 import secrets
 
-class DeliveryFee(models.Model):
-    fee = models.FloatField(default=0.0)
+# class DeliveryFee(models.Model):
+#     fee = models.FloatField(default=0.0)
 
-    def save(self, *args, **kwargs):
-        # Ensure only one row exists in the DeliveryFee model
-        if not self.pk and DeliveryFee.objects.exists():
-            # If a row exists, update it
-            existing_fee = DeliveryFee.objects.first()
-            existing_fee.fee = self.fee
-            existing_fee.save()
-            return existing_fee
-        return super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         # Ensure only one row exists in the DeliveryFee model
+#         if not self.pk and DeliveryFee.objects.exists():
+#             # If a row exists, update it
+#             existing_fee = DeliveryFee.objects.first()
+#             existing_fee.fee = self.fee
+#             existing_fee.save()
+#             return existing_fee
+#         return super().save(*args, **kwargs)
 
-    def __str__(self):
-        return f"Delivery Fee: {self.fee}"
+#     def __str__(self):
+#         return f"Delivery Fee: {self.fee}"
 
 
 class Category(models.Model):

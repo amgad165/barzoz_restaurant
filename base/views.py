@@ -30,8 +30,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
 def home(request):
-    Menu_Item.objects.filter(description__isnull=True).update(description='')
     
+
     categories = Category.objects.filter(view_homepage=True)
     menu_items_by_category = {}
 
