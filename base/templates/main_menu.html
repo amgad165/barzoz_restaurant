@@ -381,6 +381,45 @@ padding: 20px 0;
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        
+        $('.add-to-cart-button').click(function() {
+
+
+            var itemId = $(this).data('item-id');
+            // var quantity = parseInt($('#quantity').val());
+            var data = {
+                id: itemId,
+                // qty: quantity,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            };
+            
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'add_to_cart' %}',
+                data: data,
+                success: function(response) {
+
+                    // Update the total quantity in the cart display
+                    var totalQuantity = response.cart_items_count
+
+                    // $('#total-quantity').text(totalQuantity);
+					// Display the badge and animate it
+					$('.cart-badge').text(totalQuantity).show().animate({
+							fontSize: '16px',
+						}, 200).animate({
+							fontSize: '12px',
+						}, 200);
+
+                },
+                error: function(xhr) {
+                    alert('Error: ' + xhr.status + ' ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 
 <script>
     $(document).ready(function () {
