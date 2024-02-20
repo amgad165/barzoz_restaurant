@@ -352,7 +352,7 @@ font-size: 14px !important;
 				  <img src="{{ order_item.menu_item.image.url }}" alt="" class="itemImg" />
                 </div>  
                 
-                    <div class="custom-col">
+                    <div class="custom-col custom-name">
 					<h3>{{ order_item.menu_item.name }}</h3>
                 </div>
                 <div class="custom-col">
@@ -417,7 +417,7 @@ font-size: 14px !important;
  
  {% else %}
  <div style="display: flex;align-items: center;justify-content: center;" class="row">
- <div  class="cart"><h1>Noch keine Gerichte ausgewählt. Lassen Sie sich von unserer Menükarte inspirieren!</h1></div>
+ <div  class="cart"><h1>No items added to the cart yet</h1></div>
 </div>
 
           {% endif %}
@@ -502,8 +502,25 @@ font-size: 14px !important;
 
 
 
+<!-- menu item name  set the div with to the largest item width -->
+<script>
+    // Get all h3 elements within elements with the class "custom-name"
+    var elements = document.querySelectorAll('.custom-name h3');
 
+    // Initialize the variable to hold the maximum width
+    var maxWidth = 0;
 
+    // Loop through all h3 elements to find the maximum width
+    elements.forEach(function(element) {
+        var width = element.offsetWidth;
+        maxWidth = Math.max(maxWidth, width);
+    });
+
+    // Set the width of all h3 elements to the maximum width
+    elements.forEach(function(element) {
+        element.style.width = maxWidth + "px";
+    });
+</script>
 
 
 
