@@ -17,7 +17,7 @@ def mail(order,sender, items_lists,payment_type):
         f"{items_lists}<br><br>"
         f"<strong>Weitere Informationen:</strong>{order.user_details.um_hinweise}<br>"
         f"Zahlungsart: {payment_type}<br>"
-        f"Gesamtbetrag: {order.get_total()}€<br><br>"
+        f"Gesamtbetrag: {round(order.get_total(), 2)}€<br><br>"
         f"<strong>Lieferdetails:</strong><br>"
         f"Adresse: {order.user_details.street_address}<br>"
         f"Lieferzeit: 40 min<br><br>"
