@@ -37,7 +37,7 @@ class OrderAdmin(admin.ModelAdmin):
         return super().get_queryset(request).filter(ordered=True, being_delivered=False)
 
     def order_summary(self, obj):
-        return ", ".join([f"{item.quantity} of {item.menu_item.name}" for item in obj.items.all()])
+        return ", ".join([f"{item.quantity} x {item.menu_item.name}" for item in obj.items.all()])
     order_summary.short_description = 'Order Summary'
 
     def get_user_name(self, obj):
