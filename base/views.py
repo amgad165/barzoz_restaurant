@@ -500,27 +500,33 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         model = User_details
         fields = ['vorname','nachname','bezirk','street_address','hausnummer','plz_zip','telefon','email','um_hinweise']
 
-class OrderItemSerializer(serializers.ModelSerializer):
-    order_details = serializers.SerializerMethodField()
+# class OrderItemSerializer(serializers.ModelSerializer):
+#     order_details = serializers.SerializerMethodField()
 
-    class Meta:
-        model = OrderItem
-        fields = ['order_details']
+#     class Meta:
+#         model = OrderItem
+#         fields = ['order_details']
 
-    def get_order_details(self, obj):
-        return str(obj)
+#     def get_order_details(self, obj):
+#         return str(obj)
     
 class OrderSerializer(serializers.ModelSerializer):
-    items = OrderItemSerializer(many=True, read_only=True)
     user_details = UserDetailsSerializer()  # Include User_details information
     total_order_price = serializers.SerializerMethodField()
 
+    ordered_date = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%S')  # Format ordered_date field
+
     class Meta:
         model = Order
-        fields = ['id','items','ordered_date','total_order_price','payment_type','coupon','payment_type','user_details']
+        fields = ['id', 'items', 'ordered_date', 'total_order_price', 'payment_type', 'coupon', 'payment_type', 'user_details']
 
     def get_total_order_price(self, obj):
         return obj.get_total()
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['items'] = [str(item) for item in instance.items.all()]
+        return representation
     
 @api_view(['GET'])
 def get_orders(request):
@@ -544,4 +550,4 @@ def get_orders(request):
     
     except Exception as e:
         # Catch any exception that occurs and return a custom error response
-        return Response({"error": str(e)}, status=500)
+        return Response({"error": "internal error , please try again"}, status=500)
