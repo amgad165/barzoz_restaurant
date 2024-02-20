@@ -438,8 +438,8 @@ def confirm_order(request):
         items_lists = '<br>'.join(items_lists)
 
         # send email to the client mail
-        # email_from = settings.EMAIL_HOST_USER
-        # mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cash')
+        email_from = settings.EMAIL_HOST_USER
+        mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cash')
 
 
 

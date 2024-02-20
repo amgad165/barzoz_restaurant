@@ -356,7 +356,7 @@ font-size: 14px !important;
 					<h3>{{ order_item.menu_item.name }}</h3>
                 </div>
                 <div class="custom-col">
-					 <p style="white-space: nowrap;"> <input style="width: 30%; color: #000; font-weight: 700;" name="quantity" type="number" min="0" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price }}</span></p>
+					 <p style="white-space: nowrap;"> <input style="width: 30%; color: #000; font-weight: 700;" name="quantity" type="number" min="0" value="{{ order_item.quantity }}" class="qty" placeholder="{{ order_item.quantity }}"/> x <span class="small-currency">€ {{ order_item.menu_item.price|floatformat:2 }}</span></p>
 					 <input type="hidden" name="product_id" value="{{ order_item.menu_item.id }}">
                     </div>
 					
@@ -364,7 +364,7 @@ font-size: 14px !important;
 			  
 				  
 				  <div class="prodTotal cartSection custom-col">
-					<p><span class="small-currency">€</span>{{ order_item.get_total_item_price }}</p>
+					<p><span class="small-currency">€</span>{{ order_item.get_total_item_price|floatformat:2 }}</p>
 				  </div>
 				 
 				<div style="display: block;"  class="cartSection removeWrap custom-col">
@@ -392,7 +392,7 @@ font-size: 14px !important;
                     {% if delivery_fee %}
 
                     <li class="totalRow final"><span class="label">Liefergebühr</span>
-                        <span  class="value">€  {{delivery_fee}}
+                        <span  class="value">€  {{delivery_fee|floatformat:2 }}
                         </span></li>
                     {% endif %}
                     {% if discount %}
@@ -403,7 +403,7 @@ font-size: 14px !important;
                     {% endif %}
   
 				<li class="totalRow final"><span class="label">Summe</span>
-					<span id="final-total" class="value">€ {{total_price}}
+					<span id="final-total" class="value">€ {{total_price|floatformat:2}}
 					</span></li>
                 </div>
 				<li class="totalRow"><a href="{% url 'checkout' %}" class="btn continue">ZUR KASSE</a>

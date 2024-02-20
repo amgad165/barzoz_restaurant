@@ -310,7 +310,7 @@ padding: 10px !important;
                     {% for order_item in order_items %}
                     <div class="order-item-container">
                         <p>{{ order_item.menu_item.name }} x {{ order_item.quantity }}</p>
-                        <p>€ {{ order_item.get_total_item_price }}</p>
+                        <p>€ {{ order_item.get_total_item_price|floatformat:2 }}</p>
                         
                     </div>
 
@@ -318,7 +318,7 @@ padding: 10px !important;
                     {% endfor %}
                     <div style="margin-top: 20px;"  class="order-item-container">
                         <p>Zwischensumme</p>
-                        <p>€ {{subtotal_price}}</p>
+                        <p>€ {{subtotal_price|floatformat:2}}</p>
                         
                     </div>
                     <div class="line"></div>
@@ -334,13 +334,13 @@ padding: 10px !important;
                     {% if delivery_fee %}
                     <div style="margin-top: 20px;" class="order-item-container">
                         <p>Liefergebühr</p>
-                        <p style="font-size: 1.4em;font-weight: bolder;">€ {{delivery_fee}}</p>
+                        <p style="font-size: 1.4em;font-weight: bolder;">€ {{ delivery_fee|floatformat:2 }}</p>
                         
                     </div>
                     {% endif %}
                         <div  class="order-item-container">
                             <p>Gesamt (inkl. MwSt.)</p>
-                            <p style="font-size: 1.5em;font-weight: bolder;">€ {{total_price}}</p>
+                            <p style="font-size: 1.5em;font-weight: bolder;">€ {{total_price|floatformat:2}}</p>
                             
                         </div>
                         
