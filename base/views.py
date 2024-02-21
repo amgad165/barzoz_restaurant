@@ -26,6 +26,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
+import locale
+# Set the locale to German (Austria)
+locale.setlocale(locale.LC_NUMERIC, 'de_AT.UTF-8')
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -513,19 +517,40 @@ class UserDetailsSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     user_details = UserDetailsSerializer()  # Include User_details information
     total_order_price = serializers.SerializerMethodField()
-
+    subtotal_order_price = serializers.SerializerMethodField()
+    coupon_details = serializers.SerializerMethodField()
     ordered_date = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%S')  # Format ordered_date field
 
     class Meta:
         model = Order
-        fields = ['id', 'items', 'ordered_date', 'total_order_price', 'payment_type', 'coupon', 'payment_type', 'user_details']
+        fields = ['id', 'items', 'ordered_date','subtotal_order_price', 'delivery_fee', 'total_order_price', 'payment_type', 'coupon_details', 'user_details']
 
     def get_total_order_price(self, obj):
-        return obj.get_total()
+        formated_total = locale.format_string("%.2f", round(obj.get_total(), 2))
 
+        return formated_total
+    
+    def get_subtotal_order_price(self, obj):
+        formated_total = locale.format_string("%.2f", round(obj.get_sub_total(), 2))
+
+        return formated_total
+    
+    def get_coupon_details(self, obj):
+        coupon = obj.coupon
+        if coupon:
+            return {"code": coupon.code, "percent_off": coupon.percent_off}
+        return None
+    
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['items'] = [str(item) for item in instance.items.all()]
+
+        representation['delivery_fee'] = locale.format_string("%.2f", round(instance.delivery_fee.fee, 2))
+
+        if representation['payment_type'] == "cash":
+            representation['payment_type'] = "Barzahlung"
+
+            
         return representation
     
 @api_view(['GET'])
