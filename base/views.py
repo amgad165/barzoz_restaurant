@@ -549,7 +549,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
         if representation['payment_type'] == "cash":
             representation['payment_type'] = "Barzahlung"
-
             
         return representation
     
