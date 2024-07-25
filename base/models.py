@@ -72,6 +72,8 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     ordered_date = models.DateTimeField(null=True)
     payment_type = models.CharField(max_length=10, choices=[("cash", "Cash"), ("cart", "Cart")],default = "cash")
+    remark = models.CharField(max_length=255, blank=True, null=True, default="")
+    is_paid = models.BooleanField(default=False)
     stripe_session_id = models.CharField(max_length=255, blank=True, null=True)
     coupon = models.ForeignKey(
     'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
@@ -82,6 +84,11 @@ class Order(models.Model):
     delivery_fee = models.ForeignKey(DeliveryFee, on_delete=models.SET_NULL, blank=True, null=True)
 
     casher = models.BooleanField(default=False)  # New field
+
+    order_status = models.CharField(max_length=50, choices=[("printed", "printed"), ("confirmed_change_delivery_time", "confirmed_change_delivery_time"), ("error", "error"), ("kitchen", "kitchen"), ("in_delivery", "in_delivery"), ("delivered", "delivered")],null=True,blank=True)
+    delivery_time = models.DateTimeField(null=True, blank=True)  # New field for confirmed_change_delivery_time
+
+    call_center_note = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"Order {self.pk}"
@@ -115,6 +122,9 @@ class Order(models.Model):
     # If there is no associated delivery fee, set it to the first one in the database
         if not self.delivery_fee_id:
             self.delivery_fee = DeliveryFee.objects.first()
+        
+        if self.order_status == "delivered":
+            self.being_delivered = True
 
         super().save(*args, **kwargs)
     

@@ -28,13 +28,13 @@ admin.site.register(Coupon, CouponAdmin)
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('id','order_summary', 'get_user_name', 'get_user_telefon', 'get_user_email',
-                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date', 'being_delivered','casher','payment_type',
-                    'get_total')
+                    'get_bezirk', 'get_street_address', 'get_hausnummer', 'get_plz_zip', 'ordered_date','delivery_time' ,'being_delivered','casher','payment_type','is_paid','order_status',
+                    'get_total','call_center_note')
     list_editable = ('being_delivered',)  # Add this line to make 'being_delivered' editable
 
     def get_queryset(self, request):
         # Override get_queryset to include only orders where ordered = True
-        return super().get_queryset(request).filter(ordered=True, being_delivered=False)
+        return super().get_queryset(request).filter(ordered=True)
 
     def order_summary(self, obj):
         return ", ".join([f"{item.quantity} x {item.menu_item.name}" for item in obj.items.all()])
@@ -82,5 +82,5 @@ class OrderAdmin(admin.ModelAdmin):
 
     def casher(self, obj):
         return obj.casher
-    casher.short_description = 'Delivered'
+    casher.short_description = 'Retrieved By casher'
 admin.site.register(Order, OrderAdmin)

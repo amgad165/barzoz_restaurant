@@ -27,6 +27,10 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.exceptions import APIException
 import locale
+from .serializers import *
+from rest_framework import status
+from datetime import timedelta
+
 # Set the locale to German (Austria)
 locale.setlocale(locale.LC_NUMERIC, 'de_AT.UTF-8')
 
@@ -332,6 +336,7 @@ def success(request):
 
 
                 order.ordered = True
+                order.is_paid = True
                 order.save()
 
                 items_lists = '<br> '.join(items_lists)
@@ -427,36 +432,36 @@ def add_coupon(request):
 def confirm_order(request):
     session_key = request.session.session_key
     
-    try:
-        order = Order.objects.get(session_key=session_key, ordered=False)
-        order_items = order.items.all()
+    # try:
+    order = Order.objects.get(session_key=session_key, ordered=False)
+    order_items = order.items.all()
+    
+    order_items.update(ordered=True)
+    items_lists = []
+    index = 1
+    for item in order_items:
+        item.save()
+        items_lists.append(str(index)+'- ' +str(item))
+        index +=1
+
+    items_lists = '<br>'.join(items_lists)
+
+    # send email to the client mail
+    # email_from = settings.EMAIL_HOST_USER
+    # mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cash')
+
+
+
+    order.ordered = True
+
+    order.save()
+
+    return render(request,"success.html")  
+
+    # except Exception as e:
         
-        order_items.update(ordered=True)
-        items_lists = []
-        index = 1
-        for item in order_items:
-            item.save()
-            items_lists.append(str(index)+'- ' +str(item))
-            index +=1
-
-        items_lists = '<br>'.join(items_lists)
-
-        # send email to the client mail
-        email_from = settings.EMAIL_HOST_USER
-        mail(order = order, sender = email_from, items_lists=items_lists,payment_type='cash')
-
-
-
-        order.ordered = True
-
-        order.save()
-
-        return render(request,"success.html")  
-
-    except Exception as e:
         
-        
-        return HttpResponseServerError("A serious error occurred. We have been notified.", content_type="text/plain")
+    #     return HttpResponseServerError("A serious error occurred. We have been notified.", content_type="text/plain")
 
 
 
@@ -499,79 +504,126 @@ def download_pdf(request):
     
 
 
-class UserDetailsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User_details
-        fields = ['vorname','nachname','bezirk','street_address','hausnummer','plz_zip','telefon','email','um_hinweise']
+# class UserDetailsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User_details
+#         fields = ['vorname','nachname','bezirk','street_address','hausnummer','plz_zip','telefon','email','um_hinweise']
 
-# class OrderItemSerializer(serializers.ModelSerializer):
-#     order_details = serializers.SerializerMethodField()
+
+# class OrderSerializer(serializers.ModelSerializer):
+#     user_details = UserDetailsSerializer()  # Include User_details information
+#     total_order_price = serializers.SerializerMethodField()
+#     subtotal_order_price = serializers.SerializerMethodField()
+#     coupon_details = serializers.SerializerMethodField()
+#     ordered_date = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%S')  # Format ordered_date field
 
 #     class Meta:
-#         model = OrderItem
-#         fields = ['order_details']
+#         model = Order
+#         fields = ['id', 'items', 'ordered_date','subtotal_order_price', 'delivery_fee', 'total_order_price', 'payment_type', 'coupon_details', 'user_details']
 
-#     def get_order_details(self, obj):
-#         return str(obj)
+#     def get_total_order_price(self, obj):
+#         formated_total = locale.format_string("%.2f", round(obj.get_total(), 2))
+
+#         return formated_total
     
-class OrderSerializer(serializers.ModelSerializer):
-    user_details = UserDetailsSerializer()  # Include User_details information
-    total_order_price = serializers.SerializerMethodField()
-    subtotal_order_price = serializers.SerializerMethodField()
-    coupon_details = serializers.SerializerMethodField()
-    ordered_date = serializers.DateTimeField(format='%Y-%m-%dT%H:%M:%S')  # Format ordered_date field
+#     def get_subtotal_order_price(self, obj):
+#         formated_total = locale.format_string("%.2f", round(obj.get_sub_total(), 2))
 
-    class Meta:
-        model = Order
-        fields = ['id', 'items', 'ordered_date','subtotal_order_price', 'delivery_fee', 'total_order_price', 'payment_type', 'coupon_details', 'user_details']
-
-    def get_total_order_price(self, obj):
-        formated_total = locale.format_string("%.2f", round(obj.get_total(), 2))
-
-        return formated_total
+#         return formated_total
     
-    def get_subtotal_order_price(self, obj):
-        formated_total = locale.format_string("%.2f", round(obj.get_sub_total(), 2))
-
-        return formated_total
+#     def get_coupon_details(self, obj):
+#         coupon = obj.coupon
+#         if coupon:
+#             return {"code": coupon.code, "percent_off": coupon.percent_off}
+#         return None
     
-    def get_coupon_details(self, obj):
-        coupon = obj.coupon
-        if coupon:
-            return {"code": coupon.code, "percent_off": coupon.percent_off}
-        return None
-    
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        representation['items'] = [str(item) for item in instance.items.all()]
+#     def to_representation(self, instance):
+#         representation = super().to_representation(instance)
+#         representation['items'] = [str(item) for item in instance.items.all()]
 
-        representation['delivery_fee'] = locale.format_string("%.2f", round(instance.delivery_fee.fee, 2))
+#         representation['delivery_fee'] = locale.format_string("%.2f", round(instance.delivery_fee.fee, 2))
 
-        if representation['payment_type'] == "cash":
-            representation['payment_type'] = "Barzahlung"
+#         if representation['payment_type'] == "cash":
+#             representation['payment_type'] = "Barzahlung"
             
-        return representation
+#         return representation
     
+# @api_view(['GET'])
+# def get_orders(request):
+#     try:
+#         # Check if the request contains a valid API key
+#         api_key = request.headers.get('API-Key')
+#         if not APIKey.objects.filter(key=api_key).exists():
+#             return Response({"error": "Invalid API key"}, status=401)
+
+#         # Retrieve orders with casher=False
+#         orders = Order.objects.filter(casher=False, ordered = True)
+
+#         # Serialize orders and their related models
+#         serializer = OrderSerializer(orders, many=True)
+#         data = serializer.data
+
+#         # Update casher to True for retrieved orders
+#         orders.update(casher=True)
+
+#         return Response(data)
+
+#     except Exception as e:
+#         # Catch any exception that occurs and return a custom error response
+#         return Response({"error": "internal error , please try again"}, status=500)
+    
+
 @api_view(['GET'])
 def get_orders(request):
     try:
-        # Check if the request contains a valid API key
-        api_key = request.headers.get('API-Key')
+        api_key = request.headers.get('Apikey')
         if not APIKey.objects.filter(key=api_key).exists():
             return Response({"error": "Invalid API key"}, status=401)
 
-        # Retrieve orders with casher=False
-        orders = Order.objects.filter(casher=False, ordered = True)
+        # Calculate the time threshold (12 hours ago from now)
+        time_threshold = timezone.now() - timedelta(hours=12)
 
-        # Serialize orders and their related models
+        # Filter orders based on the new requirements
+        orders = Order.objects.filter(
+            ordered=True,
+            ordered_date__gte=time_threshold
+        ).exclude(order_status="delivered")
+
         serializer = OrderSerializer(orders, many=True)
         data = serializer.data
 
-        # Update casher to True for retrieved orders
+        # Update casher to True for the selected orders
         orders.update(casher=True)
 
         return Response(data)
-    
+
     except Exception as e:
-        # Catch any exception that occurs and return a custom error response
-        return Response({"error": "internal error , please try again"}, status=500)
+        return Response({"error": "internal error, please try again"}, status=500)
+
+
+
+@csrf_exempt
+@api_view(['POST'])
+def update_order_status(request):
+    serializer = OrderStatusUpdateSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        # Extract validated data
+        # id = serializer.validated_data['id']
+        status_json = serializer.validated_data['status']
+        order_id = serializer.validated_data['key']
+        changed_delivery_time = serializer.validated_data['changedDeliveryTimeString']
+        text = serializer.validated_data['text']
+
+        # Assuming 'Order' is your model and 'status', 'delivery_time', and 'note' are fields in the model
+        try:
+            order = Order.objects.get(pk=order_id)
+            order.order_status = status_json
+            order.delivery_time = changed_delivery_time
+            order.call_center_note = text
+            order.save()
+            return Response({'message': 'Order updated successfully'}, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

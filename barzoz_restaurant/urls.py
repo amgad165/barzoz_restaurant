@@ -43,6 +43,7 @@ urlpatterns = [
     path('confirm_order/', views.confirm_order, name='confirm_order'),
     
     path('api/get-orders/', views.get_orders, name='get_orders'),
+    path('api/order_status/', views.update_order_status, name='update_order_status'),
 
     path('cookies_details/', views.cookies_details, name='cookies_details'),
     path('Datenschutzerklarung/', views.Datenschutzerklarung, name='Datenschutzerklarung'),
